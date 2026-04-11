@@ -1,5 +1,11 @@
 .venv/
+venv/
 __pycache__/
 *.pyc
 .DS_Store
 .env
+scratch/
+bin/
+node_modules/
+dist/
+.env.local
