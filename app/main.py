@@ -30,11 +30,18 @@ app.include_router(
 # )
 
 from app.api.agents import router as agents_router
+from app.api.matches import router as matches_router
 
 app.include_router(
     agents_router,
     prefix="/agents",
     tags=["agents"]
+)
+
+app.include_router(
+    matches_router,
+    prefix="/matches",
+    tags=["matches"]
 )
 
 @app.get("/health")
