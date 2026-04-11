@@ -2,5 +2,6 @@ fastapi
 uvicorn
 pydantic
 python-chess
-groq
+stockfish
 requests
+groq

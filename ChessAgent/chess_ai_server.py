@@ -1,167 +1,225 @@
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-import chess
-import random
+"""
+chess_ai_server.py
+------------------
+Stockfish-powered chess agent. Uses the same REST contract as the original
+rule-based version — identical /move and /health endpoints, same request/response
+format. Only the internal decision making changes.
+"""
 
-app = FastAPI()
+import asyncio
+import logging
+import os
+from contextlib import asynccontextmanager
+from pathlib import Path
+from typing import Optional, Tuple
+
+import chess
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from stockfish import Stockfish, StockfishException
+
+# ---------------------------------------------------------------------------
+# Logging
+# ---------------------------------------------------------------------------
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# ---------------------------------------------------------------------------
+# Stockfish binary path — use bundled binary in same dir as this file
+# ---------------------------------------------------------------------------
+
+_THIS_DIR = Path(__file__).parent
+_STOCKFISH_PATH = str(_THIS_DIR / "bin" / "stockfish")
+
+# Stockfish subprocess is NOT thread/async-safe — serialize all calls with a lock
+_engine_lock = asyncio.Lock()
+
+STOCKFISH_PARAMS = {
+    "Threads": 2,
+    "Minimum Thinking Time": 100,
+    "Skill Level": 10,
+}
+
+_stockfish: Optional[Stockfish] = None
+
+
+def _create_engine() -> Stockfish:
+    """Create a fresh Stockfish engine instance."""
+    engine = Stockfish(path=_STOCKFISH_PATH, parameters=STOCKFISH_PARAMS.copy())
+    logger.info("Stockfish engine created from %s", _STOCKFISH_PATH)
+    return engine
+
+
+def _get_engine() -> Stockfish:
+    """Return the global Stockfish instance, restarting it if it crashed."""
+    global _stockfish
+    if _stockfish is None:
+        _stockfish = _create_engine()
+    return _stockfish
+
+
+def _reset_engine() -> Stockfish:
+    """Forcibly restart the Stockfish engine after a crash."""
+    global _stockfish
+    logger.warning("Restarting Stockfish engine after failure.")
+    try:
+        if _stockfish is not None:
+            _stockfish.__del__()
+    except Exception:
+        pass
+    _stockfish = _create_engine()
+    return _stockfish
+
+
+# ---------------------------------------------------------------------------
+# Lifespan: warm up the engine at startup so the first request isn't slow
+# ---------------------------------------------------------------------------
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    _get_engine()
+    logger.info("Chess agent ready — Stockfish loaded.")
+    yield
+    logger.info("Chess agent shutting down.")
+
+
+# ---------------------------------------------------------------------------
+# App
+# ---------------------------------------------------------------------------
+
+app = FastAPI(title="Arenex Chess Agent (Stockfish)", lifespan=lifespan)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# ---------------------------------------------------------------------------
+# Request / Response models (identical contract to previous agent)
+# ---------------------------------------------------------------------------
 
 class MoveRequest(BaseModel):
-    board: str
-    your_color: str
+    board: str         # FEN string
+    your_color: str    # "white" | "black"
     game_id: str
+    difficulty: int = 10  # 1-20 Stockfish skill level; default = medium
 
-def choose_move(board: chess.Board):
-    # Priority 1: Don't move into check (already handled by legal_moves)
-    
-    # Priority 2: Checkmate opponent if possible
-    for move in board.legal_moves:
-        board.push(move)
-        if board.is_checkmate():
-            board.pop()
-            return move, "Checkmate in one"
-        board.pop()
 
-    # Priority 3: Check opponent (if it leads to a winning position safely)
-    for move in board.legal_moves:
-        board.push(move)
-        if board.is_check():
-            board.pop()
-            return move, "Delivering check to gain tempo"
-        board.pop()
+# ---------------------------------------------------------------------------
+# Core move-selection logic
+# ---------------------------------------------------------------------------
 
-    # Priority 4: Capture the highest-value piece safely
-    max_net_gain = -float('inf')
-    best_move = None
-    for move in board.legal_moves:
-        board.push(move)
-        net_gain = 0
-        if board.is_capture(move):
-            captured_piece = board.piece_at(move.to_square)
-            if captured_piece:
-                piece_type = captured_piece.piece_type
-                if piece_type == chess.PAWN:
-                    net_gain += 1
-                elif piece_type == chess.KNIGHT:
-                    net_gain += 3
-                elif piece_type == chess.BISHOP:
-                    net_gain += 3
-                elif piece_type == chess.ROOK:
-                    net_gain += 5
-                elif piece_type == chess.QUEEN:
-                    net_gain += 9
-        if net_gain > max_net_gain:
-            max_net_gain = net_gain
-            best_move = move
-        board.pop()
-    if best_move:
-        return best_move, f"Capturing {chess.PIECE_NAMES[board.piece_at(best_move.to_square).piece_type]} for material gain (+{max_net_gain})"
+def _fallback_move(board: chess.Board) -> str:
+    """Return the first legal UCI move. Never raises."""
+    legal = list(board.legal_moves)
+    return legal[0].uci() if legal else ""
 
-    # Priority 5: Protect own pieces under attack
-    max_piece_value = -float('inf')
-    best_move = None
-    for move in board.legal_moves:
-        board.push(move)
-        for square in board.attacked_squares:
-            piece = board.piece_at(square)
-            if piece and piece.color == board.turn:
-                piece_type = piece.piece_type
-                if piece_type == chess.PAWN:
-                    piece_value = 1
-                elif piece_type == chess.KNIGHT:
-                    piece_value = 3
-                elif piece_type == chess.BISHOP:
-                    piece_value = 3
-                elif piece_type == chess.ROOK:
-                    piece_value = 5
-                elif piece_type == chess.QUEEN:
-                    piece_value = 9
-                if piece_value > max_piece_value:
-                    max_piece_value = piece_value
-                    best_move = move
-        board.pop()
-    if best_move:
-        return best_move, f"Protecting {chess.PIECE_NAMES[board.piece_at(best_move.to_square).piece_type]} from capture"
 
-    # Priority 6: Control center squares
-    center_squares = [chess.E4, chess.D4, chess.E5, chess.D5]
-    for move in board.legal_moves:
-        if move.to_square in center_squares:
-            return move, f"Controlling center square {chess.square_name(move.to_square)}"
+def _stockfish_move(fen: str, skill_level: int) -> Tuple[str, str]:
+    """
+    Ask Stockfish for the best move and evaluation.
 
-    # Priority 7: Develop pieces early
-    if board.fullmove_number < 10:
-        for move in board.legal_moves:
-            piece = board.piece_at(move.from_square)
-            if piece and piece.piece_type in [chess.KNIGHT, chess.BISHOP]:
-                return move, f"Developing {chess.PIECE_NAMES[piece.piece_type]} in the opening"
+    Returns (uci_move, reasoning_string).
+    Raises on unrecoverable failure — caller must handle.
+    """
+    engine = _get_engine()
 
-    # Priority 8: Castle if possible
-    if board.has_kingside_castling_rights(board.turn):
-        for move in board.legal_moves:
-            if move.from_square == chess.E1 and move.to_square == chess.G1:
-                return move, "Castling for king safety"
-    if board.has_queenside_castling_rights(board.turn):
-        for move in board.legal_moves:
-            if move.from_square == chess.E1 and move.to_square == chess.C1:
-                return move, "Castling for king safety"
+    # Clamp skill level
+    level = max(1, min(20, skill_level))
+    try:
+        engine.set_skill_level(level)
+        engine.set_fen_position(fen)
+        best = engine.get_best_move()
+    except StockfishException:
+        # Engine died — restart it and try ONE more time
+        engine = _reset_engine()
+        engine.set_skill_level(level)
+        engine.set_fen_position(fen)
+        best = engine.get_best_move()
 
-    # Priority 9: Avoid moving the same piece twice in the opening
-    if board.fullmove_number < 10:
-        moved_pieces = set()
-        for move in board.legal_moves:
-            piece = board.piece_at(move.from_square)
-            if piece and move.from_square not in moved_pieces:
-                moved_pieces.add(move.from_square)
-                return move, "Preferring undeveloped piece"
+    if not best:
+        raise ValueError("Stockfish returned no move")
 
-    # Priority 10: Fall back to a random legal move
-    move = random.choice(list(board.legal_moves))
-    return move, "No strong heuristic applies, choosing randomly"
+    # Evaluation string for reasoning
+    try:
+        eval_info = engine.get_evaluation()
+        if eval_info.get("type") == "cp":
+            score = eval_info["value"] / 100.0
+            sign = "+" if score >= 0 else ""
+            reasoning = f"Stockfish eval: {sign}{score:.2f} (skill {level}/20)"
+        elif eval_info.get("type") == "mate":
+            reasoning = f"Stockfish: Mate in {eval_info['value']} (skill {level}/20)"
+        else:
+            reasoning = f"Stockfish move (skill {level}/20)"
+    except Exception:
+        reasoning = f"Stockfish move (skill {level}/20)"
+
+    return best, reasoning
+
+
+# ---------------------------------------------------------------------------
+# Endpoints
+# ---------------------------------------------------------------------------
 
 @app.post("/move")
 async def make_move(request: MoveRequest):
     try:
         board = chess.Board(request.board)
     except ValueError:
-        raise HTTPException(status_code=400, detail="Invalid FEN string")
+        return {"error": "Invalid FEN string"}, 400
+
     if board.is_game_over():
-        raise HTTPException(status_code=400, detail="Game is over")
-    if (board.turn == chess.WHITE and request.your_color != "white") or (board.turn == chess.BLACK and request.your_color != "black"):
-        raise HTTPException(status_code=400, detail="Wrong side to move")
-    
-    move, reasoning = choose_move(board)
-    
-    # 1. ILLEGAL MOVES & 2. SELF CHECK
-    # Ensure the move is strictly legal; if not, fall back
-    if move not in board.legal_moves:
-        legal_list = list(board.legal_moves)
-        if legal_list:
-            move = legal_list[0]
-            reasoning = "Fallback to first legal move due to illegal move selection"
+        return {"error": "Game is already over"}, 400
 
-    # 3. INFINITE LOOPS IN MIRROR GAMES
-    # Check for threefold repetition
-    if move in board.legal_moves:
-        board.push(move)
-        if board.is_repetition(3):
-            board.pop()
-            # Try to find a move that avoids repetition
-            for alt_move in list(board.legal_moves):
-                board.push(alt_move)
-                if not board.is_repetition(3):
-                    move = alt_move
-                    reasoning = "Avoiding threefold repetition"
-                    board.pop()
-                    break
-                board.pop()
-        else:
-            board.pop()
+    move_uci: str = ""
+    reasoning: str = ""
 
-    return {"move": move.uci(), "reasoning": reasoning}
+    # --- Primary: Stockfish (lock prevents concurrent subprocess corruption) ---
+    async with _engine_lock:
+        try:
+            move_uci, reasoning = _stockfish_move(request.board, request.difficulty)
+        except (StockfishException, ValueError, Exception) as exc:
+            logger.error("Stockfish failed (%s); falling back to first legal move", exc)
+            move_uci = _fallback_move(board)
+            reasoning = f"Fallback: first legal move (Stockfish error: {type(exc).__name__})"
+
+    # --- Safety net: ensure the move is strictly legal ---
+    try:
+        candidate = chess.Move.from_uci(move_uci)
+        if candidate not in board.legal_moves:
+            raise ValueError("Illegal move returned by engine")
+    except Exception as exc:
+        logger.error("Move validation failed (%s); using fallback.", exc)
+        move_uci = _fallback_move(board)
+        reasoning = "Fallback: first legal move (move failed validation)"
+
+    if not move_uci:
+        return {"error": "No legal moves available"}, 400
+
+    return {"move": move_uci, "reasoning": reasoning}
+
 
 @app.get("/health")
 async def get_health():
-    return {"status": "ok", "agent": "chess-agent"}
+    engine = _get_engine()
+    # Read current skill level from engine parameters
+    try:
+        params = engine.get_parameters()
+        skill = params.get("Skill Level", 10)
+    except Exception:
+        skill = STOCKFISH_PARAMS["Skill Level"]
+
+    return {"status": "ok", "agent": "chess-agent-stockfish", "skill_level": skill}
+
+
+# ---------------------------------------------------------------------------
+# Entry point
+# ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
     import uvicorn
