@@ -31,6 +31,7 @@ app.include_router(
 
 from app.api.agents import router as agents_router
 from app.api.matches import router as matches_router
+from app.api.ws import router as ws_router
 
 app.include_router(
     agents_router,
@@ -42,6 +43,12 @@ app.include_router(
     matches_router,
     prefix="/matches",
     tags=["matches"]
+)
+
+app.include_router(
+    ws_router,
+    prefix="/ws/matches",
+    tags=["websockets"]
 )
 
 @app.get("/health")

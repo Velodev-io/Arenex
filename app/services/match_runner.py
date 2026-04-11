@@ -3,8 +3,10 @@ import httpx
 import chess
 import logging
 from sqlalchemy.future import select
+import json
 from app.database import AsyncSessionLocal
 from app.models import Match, Agent
+from app.core.redis import get_redis
 
 logger = logging.getLogger(__name__)
 
@@ -166,6 +168,19 @@ async def process_match(match_id: int):
                     match.history = list(history)  # Shallow copy ensures JSON compatibility tracking
                     await db.commit()
 
+                    # Redis broadcasting
+                    try:
+                        redis = await get_redis()
+                        await redis.publish(
+                            f"match:{match_id}",
+                            json.dumps({
+                                "type": "move",
+                                "data": history[-1]
+                            })
+                        )
+                    except Exception as re:
+                        logger.error(f"Redis publish failed: {re}")
+
         except Exception as e:
             logger.error(f"Match loop crashed: {e}")
             status = "finished"
@@ -184,6 +199,20 @@ async def process_match(match_id: int):
             match.history.append({"event": "elo_updated", "white": new_w, "black": new_b})
             
         await db.commit()
+
+        # Final Redis broadcast
+        try:
+            redis = await get_redis()
+            await redis.publish(
+                f"match:{match_id}",
+                json.dumps({
+                    "type": "finished",
+                    "result": match_result,
+                    "final_history": history
+                })
+            )
+        except Exception as re:
+            logger.error(f"Redis final publish failed: {re}")
 
 async def run_match(match_id: int):
     # Wrapper to launch the task synchronously inside FastAPI BackgroundTasks
