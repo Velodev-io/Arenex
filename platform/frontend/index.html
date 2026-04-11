@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arenex Platform</title>
+    <style>
+        :root {
+            --bg-main: #121212;
+            --bg-card: #1E1E1E;
+            --text-main: #FFFFFF;
+            --text-sub: #A0A0A0;
+            --accent: #BB86FC;
+            --accent-hover: #D0A6FF;
+            --border: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--accent);
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .title {
+            margin-bottom: 40px;
+            font-size: 32px;
+            text-align: center;
+        }
+
+        .cards {
+            display: flex;
+            gap: 30px;
+            width: 100%;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 40px;
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .stats {
+            color: var(--text-sub);
+            font-size: 14px;
+            background: rgba(255,255,255,0.05);
+            padding: 8px 16px;
+            border-radius: 20px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Arenex</h1>
+    </header>
+
+    <div class="container">
+        <h2 class="title">Choose Your Game</h2>
+        <div class="cards">
+            
+            <a href="tictactoe.html" class="card">
+                <div class="card-icon">❌⭕</div>
+                <div class="card-title">Tic-Tac-Toe</div>
+                <div class="stats" id="ttt-stats">W: 0 / L: 0 / D: 0</div>
+            </a>
+
+            <a href="chess.html" class="card">
+                <div class="card-icon">♟️</div>
+                <div class="card-title">Chess</div>
+                <div class="stats" id="chess-stats">W: 0 / L: 0 / D: 0</div>
+            </a>
+
+        </div>
+    </div>
+
+    <script>
+        function loadStats() {
+            // Tic Tac Toe stats
+            const tw = localStorage.getItem('ttt_wins') || 0;
+            const tl = localStorage.getItem('ttt_losses') || 0;
+            const td = localStorage.getItem('ttt_draws') || 0;
+            document.getElementById('ttt-stats').innerText = `W: ${tw} / L: ${tl} / D: ${td}`;
+
+            // Chess stats
+            const cw = localStorage.getItem('chess_wins') || 0;
+            const cl = localStorage.getItem('chess_losses') || 0;
+            const cd = localStorage.getItem('chess_draws') || 0;
+            document.getElementById('chess-stats').innerText = `W: ${cw} / L: ${cl} / D: ${cd}`;
+        }
+        
+        loadStats();
+    </script>
+</body>
+</html>

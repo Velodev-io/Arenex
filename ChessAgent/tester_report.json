@@ -1,0 +1,102 @@
+{
+  "pass_rate": 0.16666666666666666,
+  "threshold": 0.8,
+  "passed": false,
+  "failed_puzzles": [
+    {
+      "scenario": "hanging_queen",
+      "description": "Save own hanging queen",
+      "board_fen": "3Q2k1/8/8/8/8/8/8/3r2K1 w - - 0 1",
+      "expected_move": [
+        "d8a5",
+        "d8b6",
+        "d8c7",
+        "d8e7",
+        "d8f6",
+        "d8g5",
+        "d8h4",
+        "d8e8",
+        "d8f8",
+        "d8g8",
+        "d8a8",
+        "d8b8",
+        "d8c8"
+      ],
+      "agent_move": "g1h2",
+      "reasoning_given": "Delivering check to gain tempo"
+    },
+    {
+      "scenario": "capture_highest_value",
+      "description": "Capture highest value piece safely (Queen vs Pawn)",
+      "board_fen": "3q2k1/3p4/8/8/8/8/8/3R2K1 w - - 0 1",
+      "expected_move": "d1d8",
+      "agent_move": "d1d7",
+      "reasoning_given": "Capturing pawn for material gain (+5)"
+    },
+    {
+      "scenario": "castle",
+      "description": "Castle kingside effectively",
+      "board_fen": "r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1",
+      "expected_move": "ANY",
+      "agent_move": "ERROR",
+      "reasoning_given": "500 Server Error: Internal Server Error for url: http://localhost:8001/move"
+    },
+    {
+      "scenario": "center_control",
+      "description": "Control center square opening",
+      "board_fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
+      "expected_move": "ANY",
+      "agent_move": "ERROR",
+      "reasoning_given": "500 Server Error: Internal Server Error for url: http://localhost:8001/move"
+    },
+    {
+      "scenario": "avoid_self_check",
+      "description": "Avoid moving into check",
+      "board_fen": "4k3/4r3/8/8/8/8/8/4K3 w - - 0 1",
+      "expected_move": "ANY",
+      "agent_move": "ERROR",
+      "reasoning_given": "500 Server Error: Internal Server Error for url: http://localhost:8001/move"
+    },
+    {
+      "scenario": "development",
+      "description": "Develop pieces effectively",
+      "board_fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
+      "expected_move": "ANY",
+      "agent_move": "ERROR",
+      "reasoning_given": "500 Server Error: Internal Server Error for url: http://localhost:8001/move"
+    },
+    {
+      "scenario": "avoid_illegal_move",
+      "description": "Avoid illegal moves (pinned piece)",
+      "board_fen": "4k3/8/8/8/4r3/8/4P3/4K3 w - - 0 1",
+      "expected_move": "ANY",
+      "agent_move": "ERROR",
+      "reasoning_given": "500 Server Error: Internal Server Error for url: http://localhost:8001/move"
+    }
+  ],
+  "game_results": {
+    "vs_random": {
+      "wins": 0,
+      "losses": 0,
+      "draws": 0,
+      "crashes": 5,
+      "timeouts": 0
+    },
+    "vs_mirror": {
+      "crashes": 3,
+      "timeouts": 0,
+      "loops": 0
+    }
+  },
+  "identified_weaknesses": [
+    "Agent failed 1 'hanging_queen' puzzle(s).",
+    "Agent failed 1 'capture_highest_value' puzzle(s).",
+    "Agent failed 1 'castle' puzzle(s).",
+    "Agent failed 1 'center_control' puzzle(s).",
+    "Agent failed 1 'avoid_self_check' puzzle(s).",
+    "Agent failed 1 'development' puzzle(s).",
+    "Agent failed 1 'avoid_illegal_move' puzzle(s).",
+    "Agent experienced 5 crashes and 0 timeouts playing vs random.",
+    "Agent mirror games displayed instability: 3 crashes, 0 timeouts, 0 infinite loops."
+  ]
+}

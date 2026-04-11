@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess - Arenex Platform</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+    <style>
+        :root {
+            --bg:    #1a1a2e;
+            --card:  #16213e;
+            --txt:   #f0f0f0;
+            --sub:   #888;
+            --acc:   #BB86FC;
+            --bdr:   #2a2a4a;
+            --light: #eeeed2;   /* chess.com light square */
+            --dark:  #769656;   /* chess.com green */
+        }
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            background: var(--bg);
+            color: var(--txt);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100dvh;        /* dynamic viewport height */
+            overflow: hidden;
+        }
+
+        /* ── Header ── */
+        header {
+            flex-shrink: 0;
+            padding: 8px 28px;
+            border-bottom: 1px solid var(--bdr);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 { font-size: 18px; font-weight: 700; color: var(--acc); }
+        header a   { color: var(--acc); text-decoration: none; font-size: 13px; font-weight: 600; }
+
+        /* ── Main ── */
+        main {
+            flex: 1 1 0;
+            display: flex;
+            gap: 16px;
+            padding: 10px 16px;
+            align-items: flex-start;
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        /* ── Board column ── */
+        .board-col {
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            height: 100%;
+        }
+
+        .status-bar {
+            flex-shrink: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        #turn-badge {
+            padding: 3px 10px;
+            border-radius: 20px;
+            background: var(--acc);
+            color: #111;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        /* 
+         * The board wrapper fills remaining height in the column.
+         * We subtract the status bar (~22px) + gap (6px) + controls (~30px) + gap (6px) → ~64px
+         */
+        #board-outer {
+            /* Board is always square; fit to available height with a min/max clamp */
+            width: calc(100dvh - var(--header-h, 44px) - 64px);
+            height: calc(100dvh - var(--header-h, 44px) - 64px);
+            max-width: min(calc(100dvh - 108px), 66vw);
+            max-height: min(calc(100dvh - 108px), 66vw);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+        }
+
+        /* File labels row below the board */
+        #file-labels {
+            flex-shrink: 0;
+            display: flex;
+            background: #1a1a1a;
+        }
+        #file-labels .corner { flex: 0 0 20px; }
+        #file-labels .fl {
+            flex: 1;
+            text-align: center;
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--sub);
+            padding: 2px 0;
+        }
+
+        /* The actual grid — 9 cols (label + 8) × 8 rows */
+        #board-wrap {
+            flex: 1 1 0;
+            display: grid;
+            grid-template-columns: 20px repeat(8, 1fr);
+            grid-template-rows: repeat(8, 1fr);
+            border: 2px solid #444;
+            overflow: hidden;
+            border-radius: 2px 2px 0 0;
+        }
+
+        .rl {      /* rank label */
+            background: #1a1a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--sub);
+        }
+
+        .sq {
+            position: relative;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .sq.light { background: var(--light); }
+        .sq.dark  { background: var(--dark);  }
+
+        /* Highlights */
+        .sq.last-from, .sq.last-to { outline: 3px solid rgba(246,246,105,0.6); outline-offset: -3px; }
+        .sq.selected  { background: rgba(246,246,105,0.85) !important; }
+
+        .sq.legal-empty::before {
+            content: '';
+            position: absolute;
+            width: 30%; height: 30%;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.22);
+            z-index: 3;
+        }
+        .sq.legal-capture::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(transparent 55%, rgba(0,0,0,0.22) 55%);
+            z-index: 3;
+        }
+
+        .sq img {
+            width: 92%; height: 92%;
+            position: absolute;
+            object-fit: contain;
+            pointer-events: none;
+            z-index: 2;
+            filter: drop-shadow(0 1px 2px rgba(0,0,0,0.35));
+        }
+
+        .controls { flex-shrink: 0; display: flex; justify-content: flex-end; }
+        button {
+            background: var(--acc); color: #111;
+            border: none; padding: 7px 16px;
+            font-size: 12px; font-weight: 700;
+            border-radius: 5px; cursor: pointer;
+        }
+        button:hover { opacity: 0.85; }
+
+        /* ── Side panel ── */
+        .side-panel {
+            flex: 1 1 0;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 0;
+            overflow-y: auto;
+            height: 100%;
+        }
+        .pbox {
+            background: var(--card);
+            border: 1px solid var(--bdr);
+            border-radius: 7px;
+            padding: 10px 12px;
+        }
+        .ptitle {
+            color: var(--sub);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 7px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid var(--bdr);
+        }
+        #reasoning { font-size: 12px; line-height: 1.5; }
+        .cap-row { display: flex; flex-wrap: wrap; gap: 2px; min-height: 22px; font-size: 18px; }
+        #history {
+            display: grid;
+            grid-template-columns: 24px 1fr 1fr;
+            gap: 2px;
+            max-height: 160px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 11px;
+        }
+        .hn { color: var(--sub); }
+    </style>
+</head>
+<body>
+
+<header id="hdr">
+    <h1><a href="index.html">Arenex</a></h1>
+    <a href="index.html">← Back</a>
+</header>
+
+<main>
+    <div class="board-col">
+        <div class="status-bar">
+            <span id="player-role">You are: …</span>
+            <span id="turn-badge">Loading…</span>
+        </div>
+
+        <div id="board-outer">
+            <div id="board-wrap"></div>
+            <div id="file-labels"></div>
+        </div>
+
+        <div class="controls">
+            <button id="new-game-btn">New Game</button>
+        </div>
+    </div>
+
+    <div class="side-panel">
+        <div class="pbox">
+            <div class="ptitle">Bot Reasoning</div>
+            <div id="reasoning">Waiting for first move…</div>
+        </div>
+        <div class="pbox">
+            <div class="ptitle">Captured by You</div>
+            <div id="cap-p" class="cap-row"></div>
+            <div class="ptitle" style="margin-top:8px">Captured by Bot</div>
+            <div id="cap-b" class="cap-row"></div>
+        </div>
+        <div class="pbox">
+            <div class="ptitle">Move History</div>
+            <div id="history"></div>
+        </div>
+    </div>
+</main>
+
+<script>
+// ── Config ────────────────────────────────────────────────────
+const API        = 'http://localhost:8011/move';
+const PIECES_URL = 'https://lichess1.org/assets/piece/alpha/';
+const FILES      = ['a','b','c','d','e','f','g','h'];
+const TYPE_UC    = { p:'P', r:'R', n:'N', b:'B', q:'Q', k:'K' };
+const EMOJI      = { p:'♟',n:'♞',b:'♝',r:'♜',q:'♛', P:'♙',N:'♘',B:'♗',R:'♖',Q:'♕' };
+
+// ── State ─────────────────────────────────────────────────────
+let game         = new Chess();
+let playerColor  = 'w';
+let botColor     = 'b';
+let selectedSq   = null;
+let legalMoves   = [];
+let botBusy      = false;
+let gameId       = '';
+let lastFrom     = null;
+let lastTo       = null;
+
+// ── Refs ──────────────────────────────────────────────────────
+const boardWrap  = document.getElementById('board-wrap');
+const fileLabels = document.getElementById('file-labels');
+const roleEl     = document.getElementById('player-role');
+const badge      = document.getElementById('turn-badge');
+const reasonEl   = document.getElementById('reasoning');
+const capP       = document.getElementById('cap-p');
+const capB       = document.getElementById('cap-b');
+const histEl     = document.getElementById('history');
+
+// Match board-outer size to actual header height
+function calibrate() {
+    const h = document.getElementById('hdr').offsetHeight;
+    document.documentElement.style.setProperty('--header-h', h + 'px');
+}
+
+// ── DOM helpers ────────────────────────────────────────────────
+function mkEl(tag, cls) {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    return e;
+}
+
+// ── Build board ────────────────────────────────────────────────
+function buildBoard() {
+    boardWrap.innerHTML  = '';
+    fileLabels.innerHTML = '';
+
+    const files = playerColor === 'w' ? FILES : [...FILES].reverse();
+    const ranks = playerColor === 'w' ? [8,7,6,5,4,3,2,1] : [1,2,3,4,5,6,7,8];
+
+    for (const rank of ranks) {
+        const rl = mkEl('div','rl');
+        rl.textContent = rank;
+        boardWrap.appendChild(rl);
+
+        for (const file of files) {
+            const sq  = file + rank;
+            const idx = FILES.indexOf(file);
+            const div = mkEl('div', 'sq ' + ((idx + rank) % 2 !== 0 ? 'light' : 'dark'));
+            div.id = 'sq-' + sq;
+            div.dataset.sq = sq;
+            div.addEventListener('click', () => onSqClick(sq));
+            boardWrap.appendChild(div);
+        }
+    }
+
+    // File labels strip below board
+    const corner = mkEl('div','corner');
+    fileLabels.appendChild(corner);
+    for (const f of files) {
+        const d = mkEl('div','fl');
+        d.textContent = f;
+        fileLabels.appendChild(d);
+    }
+}
+
+// ── Render pieces + highlights ─────────────────────────────────
+function render() {
+    for (const div of boardWrap.querySelectorAll('.sq')) {
+        div.querySelector('img')?.remove();
+        div.classList.remove('selected','legal-empty','legal-capture','last-from','last-to');
+    }
+
+    const pos = game.board();
+    for (let r = 0; r < 8; r++) {
+        for (let c = 0; c < 8; c++) {
+            const p = pos[r][c];
+            if (!p) continue;
+            const sq  = FILES[c] + (8 - r);
+            const div = document.getElementById('sq-' + sq);
+            if (!div) continue;
+            const img = document.createElement('img');
+            img.src = PIECES_URL + (p.color === 'w' ? 'w' : 'b') + TYPE_UC[p.type] + '.svg';
+            div.appendChild(img);
+        }
+    }
+
+    if (lastFrom) document.getElementById('sq-' + lastFrom)?.classList.add('last-from');
+    if (lastTo)   document.getElementById('sq-' + lastTo  )?.classList.add('last-to');
+
+    if (selectedSq) {
+        document.getElementById('sq-' + selectedSq)?.classList.add('selected');
+        for (const m of legalMoves) {
+            const t = document.getElementById('sq-' + m.to);
+            if (!t) continue;
+            t.classList.add(m.flags.includes('c') || m.flags.includes('e') ? 'legal-capture' : 'legal-empty');
+        }
+    }
+}
+
+// ── Click ─────────────────────────────────────────────────────
+function onSqClick(sq) {
+    if (botBusy || game.game_over() || game.turn() !== playerColor) return;
+
+    const piece = game.get(sq);
+
+    if (piece && piece.color === playerColor) {
+        selectedSq = sq;
+        legalMoves = game.moves({ square: sq, verbose: true });
+        render();
+        return;
+    }
+
+    if (selectedSq && legalMoves.find(m => m.to === sq)) {
+        game.move({ from: selectedSq, to: sq, promotion: 'q' });
+        lastFrom = selectedSq; lastTo = sq;
+        selectedSq = null; legalMoves = [];
+        render(); updatePanel(); checkEnd();
+        if (!game.game_over()) setTimeout(doBotMove, 250);
+        return;
+    }
+
+    selectedSq = null; legalMoves = [];
+    render();
+}
+
+// ── Bot ───────────────────────────────────────────────────────
+async function doBotMove() {
+    botBusy = true;
+    setBadge("Bot's turn", '#555', '#eee');
+    reasonEl.textContent = 'Thinking…';
+
+    try {
+        const res = await fetch(API, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                board: game.fen(),
+                your_mark: botColor === 'w' ? 'white' : 'black',
+                game_id: gameId
+            })
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        const { move: uci, reasoning } = await res.json();
+        reasonEl.textContent = reasoning;
+
+        const r = game.move({ from: uci.slice(0,2), to: uci.slice(2,4), promotion: uci[4] || 'q' });
+        if (r) { lastFrom = uci.slice(0,2); lastTo = uci.slice(2,4); }
+        else reasonEl.textContent = '⚠ Bot tried illegal move: ' + uci;
+
+        render(); updatePanel(); checkEnd();
+    } catch(e) {
+        console.error(e);
+        reasonEl.textContent = '⚠ Bot unreachable on port 8011. Is start.sh running?';
+    } finally {
+        botBusy = false;
+        if (!game.game_over()) setBadge('Your turn', 'var(--acc)', '#111');
+    }
+}
+
+// ── Panel ─────────────────────────────────────────────────────
+function updatePanel() {
+    histEl.innerHTML = '';
+    const h = game.history();
+    for (let i = 0; i < h.length; i += 2) {
+        const n = mkEl('div','hn'); n.textContent = (i/2+1)+'.';
+        const w = mkEl('div'); w.textContent = h[i];
+        const b = mkEl('div'); b.textContent = h[i+1]||'';
+        histEl.append(n,w,b);
+    }
+    histEl.scrollTop = histEl.scrollHeight;
+
+    const init = {p:8,n:2,b:2,r:2,q:1,P:8,N:2,B:2,R:2,Q:1};
+    const curr = {p:0,n:0,b:0,r:0,q:0,P:0,N:0,B:0,R:0,Q:0};
+    for (const row of game.board())
+        for (const s of row)
+            if (s) { const k = s.color==='w' ? s.type.toUpperCase() : s.type; curr[k]++; }
+
+    const byW=[], byB=[];
+    for (const p of 'pnbrq') for (let i=0;i<init[p]-curr[p];i++) byW.push(EMOJI[p]);
+    for (const p of 'PNBRQ') for (let i=0;i<init[p]-curr[p];i++) byB.push(EMOJI[p]);
+
+    capP.textContent = playerColor==='w' ? byW.join(' ') : byB.join(' ');
+    capB.textContent = playerColor==='w' ? byB.join(' ') : byW.join(' ');
+}
+
+function checkEnd() {
+    if (!game.game_over()) return;
+    const ww=+localStorage.getItem('chess_wins')||0;
+    const wl=+localStorage.getItem('chess_losses')||0;
+    const wd=+localStorage.getItem('chess_draws')||0;
+
+    let msg='Draw!', bg='#888';
+    if (game.in_checkmate()) {
+        if (game.turn()===playerColor) { msg='Bot wins!'; bg='#c0392b'; localStorage.setItem('chess_losses',wl+1); }
+        else                           { msg='You win! 🎉'; bg='#27ae60'; localStorage.setItem('chess_wins',ww+1); }
+    } else { localStorage.setItem('chess_draws',wd+1); }
+
+    setBadge(msg, bg, '#fff');
+    reasonEl.textContent = msg;
+}
+
+function setBadge(text, bg, color) {
+    badge.textContent = text;
+    badge.style.background = bg;
+    badge.style.color = color;
+}
+
+// ── New game ──────────────────────────────────────────────────
+function startNewGame() {
+    game.reset();
+    selectedSq=null; legalMoves=[]; lastFrom=lastTo=null; botBusy=false;
+    gameId = 'g' + Date.now();
+    reasonEl.textContent = 'Waiting for first move…';
+
+    if (Math.random() < 0.5) { playerColor='w'; botColor='b'; roleEl.textContent='You are: White ♙'; }
+    else                     { playerColor='b'; botColor='w'; roleEl.textContent='You are: Black ♟'; }
+
+    calibrate();
+    buildBoard();
+    render();
+    updatePanel();
+    setBadge('Your turn', 'var(--acc)', '#111');
+    if (playerColor==='b') setTimeout(doBotMove, 400);
+}
+
+document.getElementById('new-game-btn').addEventListener('click', startNewGame);
+window.addEventListener('resize', () => { calibrate(); });
+startNewGame();
+</script>
+</body>
+</html>
