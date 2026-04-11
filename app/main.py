@@ -29,6 +29,14 @@ app.include_router(
 #     tags=["users"],
 # )
 
+from app.api.agents import router as agents_router
+
+app.include_router(
+    agents_router,
+    prefix="/agents",
+    tags=["agents"]
+)
+
 @app.get("/health")
 async def health_check():
     return {"status": "ok", "service": "arenex-platform"}
