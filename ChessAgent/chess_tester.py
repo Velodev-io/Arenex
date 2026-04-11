@@ -23,103 +23,224 @@ REQUEST_TIMEOUT = 5       # Seconds to wait for /move
 PASS_RATE_THRESHOLD = 0.8 # Minimum score to be considered passing
 
 # ---------------------------------------------------------------------------
-# Suite 1: Tactical Puzzles 
+# Suite 1: Tactical Puzzles — outcome-validated, not move-string-matched
 # ---------------------------------------------------------------------------
-TACTICAL_PUZZLES = [
-    {
-        "id": "mate_in_one",
-        "description": "Forced checkmate — mate in 1",
-        "fen": "6k1/5ppp/8/8/8/8/8/R5K1 w - - 0 1",
-        "color": "white",
-        "expected_moves": ["a1a8"],
-        "scenario": "mate_in_one"
-    },
-    {
-        "id": "free_queen",
-        "description": "Capture a free / hanging queen",
-        "fen": "r3k2r/8/8/3q4/8/8/8/R3K2R w KQkq - 0 1", # White's turn, black's queen at d5 is unguarded from a1
-        "color": "white",
-        "expected_moves": ["a1d1"], # Actually from a1 to d5 is horizontal+vertical not diagonal. Wait, a1 to d5 is a knight jump? 
-        # Correctly: a1 is a1. d5. actually, simple puzzle:
-        # Let's adjust FEN for a straight forward free queen: 
-        # White R at h1, Black Q at h5. 
-    },
-]
+# Each puzzle defines a "validator" key: a callable(board_before, move_uci) -> (passed: bool, reason: str)
+# Using python-chess to check the *result* of the move, not its exact UCI string.
 
-# Replacing the manual puzzles with perfectly aligned ones for simplicity and correctness of the python logic
+def _validate_mate_in_one(board_before: chess.Board, move_uci: str):
+    try:
+        move = chess.Move.from_uci(move_uci)
+        if move not in board_before.legal_moves:
+            return False, f"Illegal move {move_uci}"
+        b = board_before.copy()
+        b.push(move)
+        if b.is_checkmate():
+            return True, "Correctly delivers checkmate"
+        return False, f"Move {move_uci} does not result in checkmate"
+    except Exception as e:
+        return False, str(e)
+
+def _validate_captures_highest(board_before: chess.Board, move_uci: str):
+    """Pass if the move captures a piece AND the resulting material gain is the maximum achievable."""
+    try:
+        move = chess.Move.from_uci(move_uci)
+        if move not in board_before.legal_moves:
+            return False, f"Illegal move {move_uci}"
+        # Find all captures and their material value
+        PIECE_VALUE = {chess.PAWN: 1, chess.KNIGHT: 3, chess.BISHOP: 3, chess.ROOK: 5, chess.QUEEN: 9}
+        best_gain = 0
+        for m in board_before.legal_moves:
+            if board_before.is_capture(m):
+                victim = board_before.piece_at(m.to_square)
+                if victim:
+                    best_gain = max(best_gain, PIECE_VALUE.get(victim.piece_type, 0))
+        if best_gain == 0:
+            return False, "No captures available in position"
+        if not board_before.is_capture(move):
+            return False, f"Move {move_uci} is not a capture (best available gain: +{best_gain})"
+        victim = board_before.piece_at(move.to_square)
+        gain = PIECE_VALUE.get(victim.piece_type, 0) if victim else 0
+        if gain == best_gain:
+            return True, f"Correctly captures highest-value piece (+{gain})"
+        return False, f"Move {move_uci} gains +{gain} but best available is +{best_gain}"
+    except Exception as e:
+        return False, str(e)
+
+def _validate_saves_piece(board_before: chess.Board, move_uci: str):
+    """Pass if the most valuable attacked own piece is no longer attacked or captured by the move."""
+    try:
+        move = chess.Move.from_uci(move_uci)
+        if move not in board_before.legal_moves:
+            return False, f"Illegal move {move_uci}"
+        PIECE_VALUE = {chess.PAWN: 1, chess.KNIGHT: 3, chess.BISHOP: 3, chess.ROOK: 5, chess.QUEEN: 9}
+        # Find pieces under attack before the move
+        turn = board_before.turn
+        attacked = []
+        for sq in chess.SQUARES:
+            p = board_before.piece_at(sq)
+            if p and p.color == turn and board_before.is_attacked_by(not turn, sq):
+                attacked.append((PIECE_VALUE.get(p.piece_type, 0), sq, p))
+        if not attacked:
+            return False, "No pieces are under attack in this position"
+        attacked.sort(reverse=True)
+        most_valuable_val, most_valuable_sq, most_valuable_piece = attacked[0]
+        b = board_before.copy()
+        b.push(move)
+        # Check if that piece is still there and still attacked
+        if b.piece_at(most_valuable_sq) is None:
+            # Piece moved away or was captured in the process — check if it was moved
+            return True, f"Correctly moved {most_valuable_piece} out of danger"
+        still_attacked = b.is_attacked_by(turn, most_valuable_sq)  # now it's opponent's turn
+        if not still_attacked:
+            return True, f"Correctly defended the {most_valuable_piece} at {chess.square_name(most_valuable_sq)}"
+        return False, f"The {most_valuable_piece} at {chess.square_name(most_valuable_sq)} is still under attack after {move_uci}"
+    except Exception as e:
+        return False, str(e)
+
+def _validate_castles(board_before: chess.Board, move_uci: str):
+    try:
+        move = chess.Move.from_uci(move_uci)
+        if move not in board_before.legal_moves:
+            return False, f"Illegal move {move_uci}"
+        if board_before.is_castling(move):
+            return True, f"Correctly castles with {move_uci}"
+        # If castling is available, not castling is wrong
+        can_castle = (
+            board_before.has_kingside_castling_rights(board_before.turn) or
+            board_before.has_queenside_castling_rights(board_before.turn)
+        )
+        if can_castle:
+            return False, f"Castling was available but {move_uci} was played instead"
+        return True, "No castling rights — any legal move is fine"
+    except Exception as e:
+        return False, str(e)
+
+def _validate_avoids_check(board_before: chess.Board, move_uci: str):
+    """Pass if king is not in check after the move."""
+    try:
+        move = chess.Move.from_uci(move_uci)
+        if move not in board_before.legal_moves:
+            return False, f"Illegal move {move_uci}"
+        # All legal moves already avoid self-check — any legal move passes
+        return True, f"Move {move_uci} is legal (avoids self-check by definition)"
+    except Exception as e:
+        return False, str(e)
+
+def _validate_delivers_check(board_before: chess.Board, move_uci: str):
+    """Pass if the move results in check or checkmate."""
+    try:
+        move = chess.Move.from_uci(move_uci)
+        if move not in board_before.legal_moves:
+            return False, f"Illegal move {move_uci}"
+        b = board_before.copy()
+        b.push(move)
+        if b.is_check() or b.is_checkmate():
+            return True, f"Correctly delivers check/checkmate with {move_uci}"
+        return False, f"Move {move_uci} does not deliver check"
+    except Exception as e:
+        return False, str(e)
+
+def _validate_develops_piece(board_before: chess.Board, move_uci: str):
+    """Pass if a minor piece (knight or bishop) moves forward."""
+    try:
+        move = chess.Move.from_uci(move_uci)
+        if move not in board_before.legal_moves:
+            return False, f"Illegal move {move_uci}"
+        piece = board_before.piece_at(move.from_square)
+        if piece and piece.piece_type in (chess.KNIGHT, chess.BISHOP):
+            return True, f"Correctly develops {chess.piece_name(piece.piece_type)} with {move_uci}"
+        # A central pawn push is also valid development
+        if piece and piece.piece_type == chess.PAWN:
+            center = {chess.E4, chess.D4, chess.E5, chess.D5}
+            if move.to_square in center:
+                return True, f"Correctly pushes central pawn to {chess.square_name(move.to_square)}"
+        return False, f"Move {move_uci} does not develop a piece"
+    except Exception as e:
+        return False, str(e)
+
+def _validate_any_legal(board_before: chess.Board, move_uci: str):
+    """Pass if the move is legal — used for positions where any legal move is fine."""
+    try:
+        move = chess.Move.from_uci(move_uci)
+        if move in board_before.legal_moves:
+            return True, f"Legal move {move_uci} played"
+        return False, f"Illegal move {move_uci}"
+    except Exception as e:
+        return False, str(e)
+
+
 TACTICAL_PUZZLES = [
     {
         "scenario": "mate_in_one",
         "description": "Mate in one — back rank checkmate",
         "fen": "6k1/5ppp/8/8/8/8/8/R5K1 w - - 0 1",
         "color": "white",
-        "expected_moves": ["a1a8"]
+        "validator": _validate_mate_in_one,
     },
     {
         "scenario": "free_queen",
         "description": "Capture free queen",
-        "fen": "3q2k1/8/8/8/8/8/8/3R2K1 w - - 0 1", # White rook on d1 attacks black queen on d8
+        "fen": "3q2k1/8/8/8/8/8/8/3R2K1 w - - 0 1",
         "color": "white",
-        "expected_moves": ["d1d8"]
+        "validator": _validate_captures_highest,
     },
     {
         "scenario": "hanging_queen",
         "description": "Save own hanging queen",
-        "fen": "3Q2k1/8/8/8/8/8/8/3r2K1 w - - 0 1", # White queen on d8 is attacked by black rook on d1
+        "fen": "3Q2k1/8/8/8/8/8/8/3r2K1 w - - 0 1",
         "color": "white",
-        # All valid safe moves for the white queen
-        "expected_moves": ["d8a5","d8b6","d8c7","d8e7","d8f6","d8g5","d8h4","d8e8","d8f8","d8g8","d8a8","d8b8","d8c8"]
+        "validator": _validate_saves_piece,
     },
     {
         "scenario": "capture_highest_value",
         "description": "Capture highest value piece safely (Queen vs Pawn)",
-        "fen": "3q2k1/3p4/8/8/8/8/8/3R2K1 w - - 0 1", # White rook on d1 attacks pawn on d7 and queen on d8
+        "fen": "3q2k1/3p4/8/8/8/8/8/3R2K1 w - - 0 1",
         "color": "white",
-        "expected_moves": ["d1d8"]
+        "validator": _validate_captures_highest,
     },
     {
         "scenario": "castle",
         "description": "Castle kingside effectively",
         "fen": "r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1",
         "color": "white",
-        "expected_moves": ["e1g1", "e1c1"] # Should prefer castling
+        "validator": _validate_castles,
     },
     {
         "scenario": "center_control",
         "description": "Control center square opening",
         "fen": "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1",
         "color": "white",
-        "expected_moves": ["e2e4", "d2d4"]
+        "validator": _validate_develops_piece,
     },
     {
         "scenario": "avoid_self_check",
         "description": "Avoid moving into check",
-        "fen": "4k3/4r3/8/8/8/8/8/4K3 w - - 0 1", # White king on e1 is in check from e7.
+        "fen": "4k3/4r3/8/8/8/8/8/4K3 w - - 0 1",
         "color": "white",
-        "expected_moves": ["e1d1", "e1d2", "e1f1", "e1f2"]
+        "validator": _validate_avoids_check,
     },
     {
         "scenario": "check_fork",
-        "description": "Deliver checking fork",
-        "fen": "4k3/8/8/8/8/8/8/R3K3 w Q - 0 1", # White R on a1, Black K on e8. Need a fork puzzle.
+        "description": "Deliver check to gain tempo",
+        "fen": "4k3/8/8/8/8/8/8/R3K3 w Q - 0 1",
         "color": "white",
-        # Let's simplify the puzzle logic to match general check
-        "expected_moves": ["a1a8"]
+        "validator": _validate_delivers_check,
     },
     {
         "scenario": "development",
         "description": "Develop pieces effectively",
         "fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
         "color": "black",
-        "expected_moves": ["e7e5", "g8f6", "b8c6"]
+        "validator": _validate_develops_piece,
     },
     {
         "scenario": "avoid_illegal_move",
         "description": "Avoid illegal moves (pinned piece)",
-        "fen": "4k3/8/8/8/4r3/8/4P3/4K3 w - - 0 1", # White pawn on e2 is pinned to King on e1 by Black rook on e4
+        "fen": "4k3/8/8/8/4r3/8/4P3/4K3 w - - 0 1",
         "color": "white",
-        "expected_moves": ["e1d1", "e1d2", "e1f1", "e1f2", "e1d1"] # Anything but moving the pawn
-    }
+        "validator": _validate_avoids_check,
+    },
 ]
 
 # ---------------------------------------------------------------------------
@@ -161,26 +282,28 @@ def run_suite_1_tactics(agent_url: str) -> Tuple[list, list]:
             agent_move = data.get("move", "")
             reasoning = data.get("reasoning", "No reasoning provided")
             
-            # Use ANY_OF logic: if agent_move is in expected_moves
-            if agent_move in puzzle["expected_moves"]:
+            board_before = chess.Board(puzzle["fen"])
+            ok, reason = puzzle["validator"](board_before, agent_move)
+            
+            if ok:
                 passed.append(puzzle)
             else:
                 failed.append({
                     "scenario": puzzle["scenario"],
                     "description": puzzle["description"],
                     "board_fen": puzzle["fen"],
-                    "expected_move": puzzle["expected_moves"][0] if len(puzzle["expected_moves"]) == 1 else puzzle["expected_moves"],
+                    "validation_failure": reason,
                     "agent_move": agent_move,
-                    "reasoning_given": reasoning
+                    "reasoning_given": reasoning,
                 })
         except Exception as e:
             failed.append({
                 "scenario": puzzle["scenario"],
                 "description": puzzle["description"],
                 "board_fen": puzzle["fen"],
-                "expected_move": "ANY",
+                "validation_failure": "Exception during test",
                 "agent_move": "ERROR",
-                "reasoning_given": str(e)
+                "reasoning_given": str(e),
             })
             
     return passed, failed

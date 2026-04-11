@@ -1,0 +1,59 @@
+{
+  "pass_rate": 0.7777777777777778,
+  "threshold": 0.8,
+  "passed": false,
+  "failed_puzzles": [
+    {
+      "scenario": "capture_highest_value",
+      "description": "Capture highest value piece safely (Queen vs Pawn)",
+      "board_fen": "3q2k1/3p4/8/8/8/8/8/3R2K1 w - - 0 1",
+      "validation_failure": "Move d1d2 is not a capture (best available gain: +1)",
+      "agent_move": "d1d2",
+      "reasoning_given": "Stockfish eval: -4.68 (skill 10/20)"
+    },
+    {
+      "scenario": "castle",
+      "description": "Castle kingside effectively",
+      "board_fen": "r3k2r/pppppppp/8/8/8/8/PPPPPPPP/R3K2R w KQkq - 0 1",
+      "validation_failure": "Castling was available but a2a4 was played instead",
+      "agent_move": "a2a4",
+      "reasoning_given": "Stockfish eval: +0.07 (skill 10/20)"
+    },
+    {
+      "scenario": "check_fork",
+      "description": "Deliver check to gain tempo",
+      "board_fen": "4k3/8/8/8/8/8/8/R3K3 w Q - 0 1",
+      "validation_failure": "Move a1d1 does not deliver check",
+      "agent_move": "a1d1",
+      "reasoning_given": "Stockfish eval: +5.17 (skill 10/20)"
+    },
+    {
+      "scenario": "development",
+      "description": "Develop pieces effectively",
+      "board_fen": "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq - 0 1",
+      "validation_failure": "Move c7c5 does not develop a piece",
+      "agent_move": "c7c5",
+      "reasoning_given": "Stockfish eval: -0.28 (skill 10/20)"
+    }
+  ],
+  "game_results": {
+    "vs_random": {
+      "wins": 5,
+      "losses": 0,
+      "draws": 0,
+      "crashes": 0,
+      "timeouts": 0
+    },
+    "vs_mirror": {
+      "crashes": 0,
+      "timeouts": 0,
+      "loops": 0
+    }
+  },
+  "identified_weaknesses": [
+    "Agent failed 1 'capture_highest_value' puzzle(s).",
+    "Agent failed 1 'castle' puzzle(s).",
+    "Agent failed 1 'check_fork' puzzle(s).",
+    "Agent failed 1 'development' puzzle(s)."
+  ]
+}
