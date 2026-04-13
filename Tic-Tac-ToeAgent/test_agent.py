@@ -6,9 +6,9 @@ BASE = "http://localhost:8000"
 def print_board(board):
     symbols = {"X": "X", "O": "O", "": "."}
     for row in board:
-        print(" | ".join(symbols[c] for c in row))
-        print("-" * 9)
-    print()
+        logger.info(" | ".join(symbols[c] for c in row))
+        logger.info("-" * 9)
+    logger.info()
 
 def test(label, board, mark):
     res = requests.post(f"{BASE}/move", json={
@@ -17,10 +17,10 @@ def test(label, board, mark):
         "game_id": "test"
     })
     data = res.json()
-    print(f"Test: {label}")
+    logger.info(f"Test: {label}")
     print_board(board)
-    print(f"Move: row={data['row']}, col={data['col']}")
-    print(f"Reasoning: {data['reasoning']}\n")
+    logger.info(f"Move: row={data['row']}, col={data['col']}")
+    logger.info(f"Reasoning: {data['reasoning']}\n")
 
 # Test 1: Agent should take the win
 test(

@@ -15,4 +15,6 @@ security_venv/
 arenex.db
 dump.rdb
 bandit-out.json
+backend.log
+graphify-out/
 scripts/test-bait/

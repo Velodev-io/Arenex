@@ -1,30 +1,16 @@
 import asyncio
 import httpx
-import chess
 import logging
-from sqlalchemy.future import select
 import json
+from sqlalchemy.future import select
 from datetime import datetime, timezone
 from app.database import AsyncSessionLocal
 from app.models import Match, Agent
 from app.core.redis import get_redis
+from app.services.handlers.chess import ChessHandler
+from app.services.handlers.ttt import TTTHandler
 
 logger = logging.getLogger(__name__)
-
-# --- TTT Logic ---
-def check_winner(board, mark):
-    lines = [
-        [(0,0),(0,1),(0,2)], [(1,0),(1,1),(1,2)], [(2,0),(2,1),(2,2)],
-        [(0,0),(1,0),(2,0)], [(0,1),(1,1),(2,1)], [(0,2),(1,2),(2,2)],
-        [(0,0),(1,1),(2,2)], [(0,2),(1,1),(2,0)],
-    ]
-    for line in lines:
-        if all(board[r][c] == mark for r, c in line):
-            return True
-    return False
-
-def ttt_is_full(board):
-    return all(board[r][c] != "" for r in range(3) for c in range(3))
 
 # --- ELO Calculation ---
 def calculate_elo(elo_white: int, elo_black: int, result: str):
@@ -43,144 +29,85 @@ def calculate_elo(elo_white: int, elo_black: int, result: str):
     return new_white, new_black
 
 # --- Main Runner ---
+async def _perform_agent_turn(client, handler, board, turn, match, match_id, agent_white, agent_black, db, history):
+    current_agent = agent_white if turn == "white" else agent_black
+    endpoint = f"{str(current_agent.endpoint_url).rstrip('/')}/move"
+    payload = handler.get_payload(board, turn, match_id)
+
+    try:
+        resp = await client.post(endpoint, json=payload)
+        resp.raise_for_status()
+        data = resp.json()
+    except Exception as e:
+        logger.error(f"Agent forfeit: {e}")
+        history.append({"agent": turn, "forfeit": True, "reason": str(e)})
+        return "finished", ("black_wins" if turn == "white" else "white_wins")
+
+    try:
+        move_record = handler.process_move(board, turn, data)
+        history.append(move_record)
+        status, match_result = handler.check_result(board, turn)
+    except Exception as e:
+        history.append({"agent": turn, "forfeit": True, "reason": f"Bad move: {e}"})
+        return "finished", ("black_wins" if turn == "white" else "white_wins")
+
+    turn_next = "black" if turn == "white" else "white"
+    match.history = list(history)
+    await db.commit()
+
+    try:
+        redis = await get_redis()
+        await redis.publish(f"match:{match_id}", json.dumps({"type": "move", "data": history[-1]}))
+    except Exception as e:
+        logger.error(f"Failed to publish move to Redis: {e}")
+    
+    return status, match_result, turn_next
+
+def _update_match_stats(match, agent_white, agent_black, match_result):
+    match.status, match.result = "finished", match_result
+    if match_result:
+        new_w, new_b = calculate_elo(agent_white.elo, agent_black.elo, match_result)
+        agent_white.elo, agent_black.elo = new_w, new_b
+        match.history.append({"event": "elo_updated", "white": new_w, "black": new_b})
+
+async def _initialize_match_data(db, match_id):
+    result = await db.execute(select(Match).where(Match.id == match_id))
+    match = result.scalars().first()
+    if not match or match.is_practice:
+        return None, None, None
+
+    res_w = await db.execute(select(Agent).where(Agent.id == match.agent_white_id))
+    agent_white = res_w.scalars().first()
+    res_b = await db.execute(select(Agent).where(Agent.id == match.agent_black_id))
+    agent_black = res_b.scalars().first()
+    
+    return match, agent_white, agent_black
+
 async def process_match(match_id: int):
     async with AsyncSessionLocal() as db:
-        result = await db.execute(select(Match).where(Match.id == match_id))
-        match = result.scalars().first()
+        match, agent_white, agent_black = await _initialize_match_data(db, match_id)
         if not match:
             return
 
-        # Handle Practice Mode
-        if match.is_practice:
-            # Practice mode logic is handled primarily via /matches/{id}/user-move endpoint
-            # This runner handles agent-vs-agent matches.
-            return
-
-        res = await db.execute(select(Agent).where(Agent.id == match.agent_white_id))
-        agent_white = res.scalars().first()
-        res = await db.execute(select(Agent).where(Agent.id == match.agent_black_id))
-        agent_black = res.scalars().first()
-
         if not agent_white or not agent_black:
-            match.status = "finished"
-            match.result = "invalid_agents"
+            match.status, match.result = "finished", "invalid_agents"
             await db.commit()
             return
 
-        game_type = agent_white.game_type
-        if game_type == "chess":
-            board = chess.Board()
-            board.remove_piece_at(chess.A2)
-            board.remove_piece_at(chess.A7)
-        else:
-            board = [["","",""],["","",""],["","",""]]
-        history = []
-        status = "live"
-        match_result = None
-        turn = "white"
+        handler = ChessHandler if agent_white.game_type == "chess" else TTTHandler
+        board, history, status, match_result, turn = handler.initialize_board(), [], "live", None, "white"
 
         try:
             async with httpx.AsyncClient(timeout=10.0) as client:
                 while status == "live":
-                    current_agent = agent_white if turn == "white" else agent_black
-                    endpoint = f"{str(current_agent.endpoint_url).rstrip('/')}/move"
-
-                    if game_type == "chess":
-                        payload = {
-                            "board": board.fen(),
-                            "your_color": turn,
-                            "game_id": str(match_id),
-                            "difficulty": 10 # Default for agent-vs-agent
-                        }
-                    else:
-                        payload = {
-                            "board": board,
-                            "your_mark": "X" if turn == "white" else "O",
-                            "game_id": str(match_id)
-                        }
-
-                    try:
-                        resp = await client.post(endpoint, json=payload)
-                        resp.raise_for_status()
-                        data = resp.json()
-                    except Exception as e:
-                        logger.error(f"Agent forfeit: {e}")
-                        status = "finished"
-                        match_result = "black_wins" if turn == "white" else "white_wins"
-                        history.append({"agent": turn, "forfeit": True, "reason": str(e)})
-                        break
-
-                    try:
-                        if game_type == "chess":
-                            move_uci = data.get("move")
-                            if not move_uci:
-                                raise ValueError("Missing 'move' in response")
-                            move = chess.Move.from_uci(move_uci)
-                            if move not in board.legal_moves:
-                                raise ValueError("Illegal move")
-                            board.push(move)
-                            history.append({
-                                "agent": turn,
-                                "move": move_uci,
-                                "fen": board.fen(),
-                                "reasoning": data.get("reasoning", ""),
-                                "timestamp": str(datetime.now(timezone.utc))
-                            })
-                            if board.is_checkmate():
-                                status = "finished"
-                                match_result = "white_wins" if turn == "white" else "black_wins"
-                            elif board.is_game_over():
-                                status = "finished"
-                                match_result = "draw"
-                        else:
-                            r, c = data.get("row"), data.get("col")
-                            if r is None or c is None or board[r][c] != "":
-                                raise ValueError("Illegal cell selection")
-                            mark = "X" if turn == "white" else "O"
-                            board[r][c] = mark
-                            history.append({
-                                "agent": turn,
-                                "move": {"row": r, "col": c},
-                                "board": [row[:] for row in board],
-                                "reasoning": data.get("reasoning", ""),
-                                "timestamp": str(datetime.now(timezone.utc))
-                            })
-                            if check_winner(board, mark):
-                                status = "finished"
-                                match_result = "white_wins" if turn == "white" else "black_wins"
-                            elif ttt_is_full(board):
-                                status = "finished"
-                                match_result = "draw"
-                    except Exception as e:
-                        status = "finished"
-                        match_result = "black_wins" if turn == "white" else "white_wins"
-                        history.append({"agent": turn, "forfeit": True, "reason": f"Bad move: {e}"})
-                        break
-
-                    turn = "black" if turn == "white" else "white"
-                    match.history = list(history)
-                    await db.commit()
-
-                    try:
-                        redis = await get_redis()
-                        await redis.publish(f"match:{match_id}", json.dumps({"type": "move", "data": history[-1]}))
-                    except Exception as e:
-                        logger.error(f"Failed to publish move to Redis: {e}")
-
+                    res = await _perform_agent_turn(client, handler, board, turn, match, match_id, agent_white, agent_black, db, history)
+                    status, match_result, turn = res if len(res) == 3 else (res[0], res[1], turn)
                     await asyncio.sleep(0.2)
-
         except Exception as e:
             logger.error(f"Match loop crashed: {e}")
-            status = "finished"
-            match_result = "draw"
+            status, match_result = "finished", "draw"
 
-        match.status = "finished"
-        match.result = match_result
-        match.history = history
-        if match_result:
-            new_w, new_b = calculate_elo(agent_white.elo, agent_black.elo, match_result)
-            agent_white.elo, agent_black.elo = new_w, new_b
-            match.history.append({"event": "elo_updated", "white": new_w, "black": new_b})
+        _update_match_stats(match, agent_white, agent_black, match_result)
         await db.commit()
 
         try:

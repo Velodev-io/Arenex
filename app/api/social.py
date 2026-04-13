@@ -1,6 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.future import select
-from sqlalchemy.orm import selectinload
 from app.database import AsyncSessionLocal
 from app.models import Match, Comment, MatchLike
 from pydantic import BaseModel

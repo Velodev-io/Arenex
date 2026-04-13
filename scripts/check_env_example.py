@@ -28,11 +28,11 @@ def main():
 
     missing = env_keys - example_keys
     if missing:
-        print(f"WARNING: The following keys are in .env but missing from .env.example: {', '.join(missing)}")
-        print("Please update .env.example to match .env structure.")
+        logger.info(f"WARNING: The following keys are in .env but missing from .env.example: {', '.join(missing)}")
+        logger.info("Please update .env.example to match .env structure.")
         # We don't block the commit per requirement: "Warn (don't block) if .env.example is missing a key"
     else:
-        print(".env.example is up to date with .env keys.")
+        logger.info(".env.example is up to date with .env keys.")
 
 if __name__ == "__main__":
     main()
