@@ -126,7 +126,7 @@ If FILES_OVERRIDE is set (from --files flag):
 if [ -n "$FILES_OVERRIDE" ]; then
   REVIEW_FILES=()
   REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null)
-  
+
   for file_path in "${FILES_ARRAY[@]}"; do
     # Security: validate path is within repository (prevent path traversal)
     ABS_PATH=$(realpath -m "${file_path}" 2>/dev/null || echo "${file_path}")
@@ -134,7 +134,7 @@ if [ -n "$FILES_OVERRIDE" ]; then
       echo "Error: File path outside repository, skipping: ${file_path}"
       continue
     fi
-    
+
     # Validate path exists (relative to repo root)
     if [ -f "${REPO_ROOT}/${file_path}" ] || [ -f "${file_path}" ]; then
       REVIEW_FILES+=("$file_path")
@@ -142,7 +142,7 @@ if [ -n "$FILES_OVERRIDE" ]; then
       echo "Warning: File not found, skipping: ${file_path}"
     fi
   done
-  
+
   echo "File scope: ${#REVIEW_FILES[@]} files from --files override"
 fi
 ```
@@ -156,7 +156,7 @@ If --files NOT provided:
 if [ -z "$FILES_OVERRIDE" ]; then
   SUMMARIES=$(ls "${PHASE_DIR}"/*-SUMMARY.md 2>/dev/null)
   REVIEW_FILES=()
-  
+
   if [ -n "$SUMMARIES" ]; then
     for summary in $SUMMARIES; do
       # Extract key_files.created and key_files.modified using node for reliable YAML parsing
@@ -179,7 +179,7 @@ if [ -z "$FILES_OVERRIDE" ]; then
         }
         if (files.length) console.log(files.join('\n'));
       " 2>/dev/null)
-      
+
       # Add extracted files to REVIEW_FILES array
       if [ -n "$EXTRACTED" ]; then
         while IFS= read -r file; do
@@ -189,7 +189,7 @@ if [ -z "$FILES_OVERRIDE" ]; then
         done <<< "$EXTRACTED"
       fi
     done
-    
+
     if [ ${#REVIEW_FILES[@]} -eq 0 ]; then
       echo "Warning: SUMMARY artifacts found but contained no file paths. Falling back to git diff."
     fi
@@ -204,25 +204,25 @@ If no SUMMARY.md files found OR no files extracted from them:
 if [ ${#REVIEW_FILES[@]} -eq 0 ]; then
   # Compute diff base from phase commits — fail closed if no reliable base found
   PHASE_COMMITS=$(git log --oneline --all --grep="${PADDED_PHASE}" --format="%H" 2>/dev/null)
-  
+
   if [ -n "$PHASE_COMMITS" ]; then
     DIFF_BASE=$(echo "$PHASE_COMMITS" | tail -1)^
-    
+
     # Verify the parent commit exists (first commit in repo has no parent)
     if ! git rev-parse "${DIFF_BASE}" >/dev/null 2>&1; then
       DIFF_BASE=$(echo "$PHASE_COMMITS" | tail -1)
     fi
-    
+
     # Run git diff with specific exclusions (per D-03)
     DIFF_FILES=$(git diff --name-only "${DIFF_BASE}..HEAD" -- . \
       ':!.planning/' ':!ROADMAP.md' ':!STATE.md' \
       ':!*-SUMMARY.md' ':!*-VERIFICATION.md' ':!*-PLAN.md' \
       ':!package-lock.json' ':!yarn.lock' ':!Gemfile.lock' ':!poetry.lock' 2>/dev/null)
-    
+
     while IFS= read -r file; do
       [ -n "$file" ] && REVIEW_FILES+=("$file")
     done <<< "$DIFF_FILES"
-    
+
     echo "File scope: ${#REVIEW_FILES[@]} files from git diff (base: ${DIFF_BASE})"
   else
     # Fail closed — no reliable diff base found. Do not use arbitrary HEAD~N.
@@ -390,10 +390,10 @@ if [ -f "${REVIEW_PATH}" ]; then
     const match = content.match(/^---\n([\s\S]*?)\n---/);
     if (match && /status:/.test(match[1])) { console.log('valid'); } else { console.log('invalid'); }
   " 2>/dev/null)
-  
+
   if [ "$HAS_STATUS" = "valid" ]; then
     echo "REVIEW.md created at ${REVIEW_PATH}"
-    
+
     if [ "$COMMIT_DOCS" = "true" ]; then
       node ".agent/get-shit-done/bin/gsd-tools.cjs" commit \
         "docs(${PADDED_PHASE}): add code review report" \
@@ -444,7 +444,7 @@ Display inline summary to user:
 
   Depth:           ${REVIEW_DEPTH}
   Files Reviewed:  ${FILES_REVIEWED}
-  
+
   Findings:
     Critical:  ${CRITICAL}
     Warning:   ${WARNING}

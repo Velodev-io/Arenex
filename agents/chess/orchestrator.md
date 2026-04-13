@@ -10,7 +10,7 @@ This script oversees the end-to-end self-improvement pipeline of the Chess Agent
 
 ## Core Logic and Flow
 
-The orchestrator operates in a `while` loop up to a configurable maximum number of iterations. 
+The orchestrator operates in a `while` loop up to a configurable maximum number of iterations.
 
 For each iteration:
 1.  **Build Phase:** Programmatically calls the `run()` function in `builder_agent.py`. It passes the path to the `tester_report.json` if one exists from a previous iteration. Wait for generation to complete and write `chess_agent.py` to disk.

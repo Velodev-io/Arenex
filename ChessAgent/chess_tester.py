@@ -275,16 +275,16 @@ def request_move(url: str, fen: str, color: str, game_id: str) -> dict:
 def run_suite_1_tactics(agent_url: str) -> Tuple[list, list]:
     passed = []
     failed = []
-    
+
     for idx, puzzle in enumerate(TACTICAL_PUZZLES):
         try:
             data = request_move(agent_url, puzzle["fen"], puzzle["color"], f"puzzle_{idx}")
             agent_move = data.get("move", "")
             reasoning = data.get("reasoning", "No reasoning provided")
-            
+
             board_before = chess.Board(puzzle["fen"])
             ok, reason = puzzle["validator"](board_before, agent_move)
-            
+
             if ok:
                 passed.append(puzzle)
             else:
@@ -305,19 +305,19 @@ def run_suite_1_tactics(agent_url: str) -> Tuple[list, list]:
                 "agent_move": "ERROR",
                 "reasoning_given": str(e),
             })
-            
+
     return passed, failed
 
 def run_suite_2_vs_random(agent_url: str, games: int = 5) -> dict:
     results = {"wins": 0, "losses": 0, "draws": 0, "crashes": 0, "timeouts": 0}
-    
+
     for i in range(games):
         play_as = "white" if i % 2 == 0 else "black"
         board = chess.Board()
-        
+
         while not board.is_game_over() and len(board.move_stack) < 200:
             current_turn = "white" if board.turn == chess.WHITE else "black"
-            
+
             if current_turn == play_as:
                 # Agent turn
                 try:
@@ -338,7 +338,7 @@ def run_suite_2_vs_random(agent_url: str, games: int = 5) -> dict:
                 # Random opponent turn
                 moves = list(board.legal_moves)
                 board.push(random.choice(moves))
-                
+
         # Tally result
         if board.is_game_over():
             winner = board.outcome().winner
@@ -348,30 +348,30 @@ def run_suite_2_vs_random(agent_url: str, games: int = 5) -> dict:
                 results["wins"] += 1
             else:
                 results["losses"] += 1
-                
+
     return results
 
 def run_suite_3_mirror(agent_url: str, games: int = 3) -> dict:
     results = {"crashes": 0, "timeouts": 0, "loops": 0}
-    
+
     for i in range(games):
         board = chess.Board()
         seen_positions = {}
-        
+
         while not board.is_game_over() and len(board.move_stack) < 200:
             current_color = "white" if board.turn == chess.WHITE else "black"
-            
+
             # Loop detection (simple repetition check based on FEN)
             fen_base = board.fen().split(" ")[0]
             seen_positions[fen_base] = seen_positions.get(fen_base, 0) + 1
             if seen_positions[fen_base] >= 3:
                 results["loops"] += 1
                 break
-                
+
             try:
                 data = request_move(agent_url, board.fen(), current_color, f"mirror_{i}")
                 move = chess.Move.from_uci(data["move"])
-                
+
                 if move in board.legal_moves:
                     board.push(move)
                 else:
@@ -383,31 +383,31 @@ def run_suite_3_mirror(agent_url: str, games: int = 3) -> dict:
             except Exception:
                 results["crashes"] += 1
                 break
-                
+
     return results
 
 def interpret_weaknesses(failed_puzzles: list, random_res: dict, mirror_res: dict) -> list:
     weaknesses = []
-    
+
     # Analyze puzzles
     puzzle_counts = {}
     for failure in failed_puzzles:
         s = failure["scenario"]
         puzzle_counts[s] = puzzle_counts.get(s, 0) + 1
-        
+
     for scenario, count in puzzle_counts.items():
         weaknesses.append(f"Agent failed {count} '{scenario}' puzzle(s).")
-        
+
     # Analyze random games
     if random_res["losses"] > 0:
         weaknesses.append(f"Agent lost {random_res['losses']}/{random_res['wins'] + random_res['losses'] + random_res['draws']} games vs random opponent (should win 100%).")
     if random_res["crashes"] > 0 or random_res["timeouts"] > 0:
         weaknesses.append(f"Agent experienced {random_res['crashes']} crashes and {random_res['timeouts']} timeouts playing vs random.")
-        
+
     # Analyze mirror games
     if mirror_res["crashes"] > 0 or mirror_res["timeouts"] > 0 or mirror_res["loops"] > 0:
         weaknesses.append(f"Agent mirror games displayed instability: {mirror_res['crashes']} crashes, {mirror_res['timeouts']} timeouts, {mirror_res['loops']} infinite loops.")
-        
+
     return weaknesses
 
 def run(agent_url: str = DEFAULT_URL, output_path: str = "tester_report.json"):
@@ -415,32 +415,32 @@ def run(agent_url: str = DEFAULT_URL, output_path: str = "tester_report.json"):
     if not wait_for_server(agent_url):
         print("Server not responding. Tester aborting.")
         return {"passed": False, "pass_rate": 0.0}
-        
+
     print("Running Suite 1: Tactical Puzzles...")
     passed_puzzles, failed_puzzles = run_suite_1_tactics(agent_url)
-    
+
     print("Running Suite 2: Games vs Random...")
     random_results = run_suite_2_vs_random(agent_url, games=5)
-    
+
     print("Running Suite 3: Mirror Games...")
     mirror_results = run_suite_3_mirror(agent_url, games=3)
-    
+
     # Calculate consolidated stats
     total_puzzles = len(TACTICAL_PUZZLES)
     total_games = 5 + 3 # 5 random, 3 mirror
     total_metrics = total_puzzles + total_games
-    
+
     # Calculate failures across all suites to define pass_rate
     # Loss against random or any crash/loop counts as a metric failure
     puzzle_fails = len(failed_puzzles)
     game_fails = random_results["losses"] + random_results["crashes"] + random_results["timeouts"] \
                  + mirror_results["crashes"] + mirror_results["timeouts"] + mirror_results["loops"]
-                 
+
     total_failures = puzzle_fails + game_fails
     pass_rate = max(0.0, (total_metrics - total_failures) / total_metrics)
-    
+
     weaknesses = interpret_weaknesses(failed_puzzles, random_results, mirror_results)
-    
+
     report = {
         "pass_rate": pass_rate,
         "threshold": PASS_RATE_THRESHOLD,
@@ -452,13 +452,13 @@ def run(agent_url: str = DEFAULT_URL, output_path: str = "tester_report.json"):
         },
         "identified_weaknesses": weaknesses
     }
-    
+
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2)
-        
+
     print(f"Testing complete. Pass rate: {pass_rate*100:.1f}%")
     print(f"Report saved to {output_path}")
-    
+
     return report
 
 if __name__ == "__main__":
@@ -466,5 +466,5 @@ if __name__ == "__main__":
     parser.add_argument("--url", type=str, default=DEFAULT_URL, help="Agent server URL")
     parser.add_argument("--output", type=str, default="tester_report.json", help="Output JSON path")
     args = parser.parse_args()
-    
+
     run(agent_url=args.url, output_path=args.output)

@@ -1,7 +1,7 @@
 # Chess Agent Spec
 
 ## Overview
-This agent is a FastAPI-based web server that plays Chess. It serves as the "Scaffold" implementation whose core move logic is designed to be autonomously improved and implemented by a Builder Agent. 
+This agent is a FastAPI-based web server that plays Chess. It serves as the "Scaffold" implementation whose core move logic is designed to be autonomously improved and implemented by a Builder Agent.
 
 The server evaluates a chess board state (provided as a FEN string) and returns the optimal next move (in UCI format) along with a string describing its "reasoning" for the move.
 

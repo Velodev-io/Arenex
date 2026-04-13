@@ -13,24 +13,24 @@ logger = logging.getLogger(__name__)
 @router.websocket("/{match_id}")
 async def match_websocket(websocket: WebSocket, match_id: int):
     await websocket.accept()
-    
+
     # 1. Fetch current state for catchup
     async with AsyncSessionLocal() as db:
         result = await db.execute(select(Match).where(Match.id == match_id))
         match_obj = result.scalars().first()
-        
+
         if not match_obj:
             await websocket.send_json({"type": "error", "detail": "Match not found"})
             await websocket.close()
             return
-            
+
         # Send catchup event
         await websocket.send_json({
             "type": "catchup",
             "status": match_obj.status,
             "history": match_obj.history
         })
-        
+
         # 2. If already completed, close cleanly
         if match_obj.status == "finished":
             await websocket.close()
@@ -41,7 +41,7 @@ async def match_websocket(websocket: WebSocket, match_id: int):
     pubsub = redis.pubsub()
     channel = f"match:{match_id}"
     await pubsub.subscribe(channel)
-    
+
     try:
         while True:
             # Check if socket is still open (optional, but good practice)
@@ -50,7 +50,7 @@ async def match_websocket(websocket: WebSocket, match_id: int):
             if message:
                 data = json.loads(message["data"])
                 await websocket.send_json(data)
-                
+
                 # If we receive a 'finished' event, close after sending it
                 if data.get("type") == "finished":
                     break

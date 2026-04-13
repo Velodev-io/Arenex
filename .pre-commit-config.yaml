@@ -1,0 +1,55 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: check-added-large-files
+        args: ['--maxkb=1024']
+      - id: check-json
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        args: ['--baseline', '.secrets.baseline']
+        exclude: .*/tests/.*
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.9
+    hooks:
+      - id: bandit
+        args: ["-ll", "-v"] # -ll blocks medium and above
+        files: .py$
+
+  - repo: local
+    hooks:
+      - id: dangerous-files
+        name: Dangerous File Check
+        entry: >
+          bash -c "if git diff --cached --name-only | grep -E '^.env$|\.pem$|\.key$|\.p12$|^node_modules/|^__pycache__/';
+          then echo 'BLOCKED: Sensitive files detected in commit!'; exit 1; fi"
+        language: system
+        stages: [commit]
+
+      - id: node-audit
+        name: Node.js Dependency Audit
+        entry: bash -c "cd minecraft-agent-template && npm audit --audit-level=high"
+        language: system
+        files: minecraft-agent-template/package.json
+        pass_filenames: false
+
+      - id: python-audit
+        name: Python Dependency Audit
+        entry: bash -c "security_venv/bin/pip-audit -r requirements.txt"
+        language: system
+        files: requirements.txt
+        pass_filenames: false
+
+      - id: env-example-check
+        name: .env.example Integrity Check
+        entry: security_venv/bin/python3 scripts/check_env_example.py
+        language: system
+        pass_filenames: false
+        verbose: true

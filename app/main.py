@@ -6,7 +6,21 @@ from app.schemas.user import UserRead, UserCreate, UserUpdate
 from app.services.user_manager import get_user_manager
 from app.core.auth import auth_backend
 
+from fastapi.middleware.cors import CORSMiddleware
+from app.database import settings
+
 app = FastAPI(title="Arenex Platform")
+
+# CORS configuration
+allowed_origins = [origin.strip() for origin in settings.ALLOWED_ORIGINS.split(",")]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=allowed_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 fastapi_users = FastAPIUsers[User, int](get_user_manager, [auth_backend])
 
@@ -32,6 +46,7 @@ app.include_router(
 from app.api.agents import router as agents_router
 from app.api.matches import router as matches_router
 from app.api.ws import router as ws_router
+from app.api.social import router as social_router
 
 app.include_router(
     agents_router,
@@ -49,6 +64,12 @@ app.include_router(
     ws_router,
     prefix="/ws/matches",
     tags=["websockets"]
+)
+
+app.include_router(
+    social_router,
+    prefix="/social",
+    tags=["social"]
 )
 
 @app.get("/health")

@@ -10,3 +10,9 @@ node_modules/
 dist/
 .env.local
 agents/chess/.env
+security_venv/
+.pre-commit-cache/
+arenex.db
+dump.rdb
+bandit-out.json
+scripts/test-bait/

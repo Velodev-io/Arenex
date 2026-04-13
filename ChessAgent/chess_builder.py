@@ -93,15 +93,15 @@ def generate_chess_agent(report_path: str = None) -> str:
 
     # 2. Prompt Construction
     user_prompt = "Generate the complete chess AI server file from scratch implementing all 10 priorities."
-    
+
     if report_path:
         if not os.path.exists(report_path):
             print(f"Error: Report file {report_path} not found.", file=sys.stderr)
             sys.exit(1)
-            
+
         with open(report_path, "r", encoding="utf-8") as f:
             report_data = json.load(f)
-            
+
         user_prompt = (
             f"The previous version of the chess agent failed fully executing the tests.\n\n"
             f"Pass Rate: {report_data.get('pass_rate', 'N/A')}\n\n"
@@ -116,7 +116,7 @@ def generate_chess_agent(report_path: str = None) -> str:
     # 3. API Invocation
     print(f"Calling Groq API to generate/improve {OUTPUT_FILE}...")
     client = Groq(api_key=api_key)
-    
+
     try:
         response = client.chat.completions.create(
             model="llama-3.3-70b-versatile",
@@ -129,7 +129,7 @@ def generate_chess_agent(report_path: str = None) -> str:
     except Exception as e:
         print(f"Error during API call: {e}", file=sys.stderr)
         sys.exit(1)
-        
+
     content = response.choices[0].message.content
 
     # 4. Output Extraction
@@ -138,7 +138,7 @@ def generate_chess_agent(report_path: str = None) -> str:
         print("Error: Could not extract Python code from the LLM response.", file=sys.stderr)
         # print("Raw response:", content)
         sys.exit(1)
-        
+
     python_code = match.group(1).strip()
     return python_code
 
@@ -149,10 +149,10 @@ if __name__ == "__main__":
 
     # Generate the code
     code = generate_chess_agent(args.report)
-    
+
     # 5. File Generation
     output_path = os.path.join(os.path.dirname(__file__), OUTPUT_FILE)
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(code)
-        
+
     print(f"Successfully generated and wrote {output_path}")

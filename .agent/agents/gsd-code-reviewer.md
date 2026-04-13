@@ -24,7 +24,7 @@ Before reviewing, discover project context:
 1. List available skills (subdirectories)
 2. Read `SKILL.md` for each skill (lightweight index ~130 lines)
 3. Load specific `rules/*.md` files as needed during review
-4. 
+4.
 5. Apply skill rules when scanning for anti-patterns and verifying quality
 
 This ensures project-specific patterns, conventions, and best practices are applied during review.

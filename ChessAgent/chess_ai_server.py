@@ -9,6 +9,7 @@ format. Only the internal decision making changes.
 import asyncio
 import logging
 import os
+import random
 from contextlib import asynccontextmanager
 from pathlib import Path
 from typing import Optional, Tuple
@@ -38,12 +39,13 @@ _engine_lock = asyncio.Lock()
 
 STOCKFISH_PARAMS = {
     "Threads": 2,
-    "Minimum Thinking Time": 100,
-    "Skill Level": 10,
+    "Hash": 256,
+    "Move Overhead": 30,
+    "Minimum Thinking Time": 200,
+    "UCI_LimitStrength": False,
 }
 
 _stockfish: Optional[Stockfish] = None
-
 
 def _create_engine() -> Stockfish:
     """Create a fresh Stockfish engine instance."""
@@ -51,14 +53,12 @@ def _create_engine() -> Stockfish:
     logger.info("Stockfish engine created from %s", _STOCKFISH_PATH)
     return engine
 
-
 def _get_engine() -> Stockfish:
     """Return the global Stockfish instance, restarting it if it crashed."""
     global _stockfish
     if _stockfish is None:
         _stockfish = _create_engine()
     return _stockfish
-
 
 def _reset_engine() -> Stockfish:
     """Forcibly restart the Stockfish engine after a crash."""
@@ -72,24 +72,22 @@ def _reset_engine() -> Stockfish:
     _stockfish = _create_engine()
     return _stockfish
 
-
 # ---------------------------------------------------------------------------
-# Lifespan: warm up the engine at startup so the first request isn't slow
+# Lifespan
 # ---------------------------------------------------------------------------
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     _get_engine()
-    logger.info("Chess agent ready — Stockfish loaded.")
+    logger.info("Chess agent ready — Aggressive Stockfish loaded.")
     yield
     logger.info("Chess agent shutting down.")
-
 
 # ---------------------------------------------------------------------------
 # App
 # ---------------------------------------------------------------------------
 
-app = FastAPI(title="Arenex Chess Agent (Stockfish)", lifespan=lifespan)
+app = FastAPI(title="Arenex Chess Agent (Aggressive Stockfish)", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
@@ -100,67 +98,112 @@ app.add_middleware(
 )
 
 # ---------------------------------------------------------------------------
-# Request / Response models (identical contract to previous agent)
+# Request / Response models
 # ---------------------------------------------------------------------------
 
 class MoveRequest(BaseModel):
     board: str         # FEN string
     your_color: str    # "white" | "black"
     game_id: str
-    difficulty: int = 10  # 1-20 Stockfish skill level; default = medium
-
+    difficulty: int = 10  # 1-20 range mapping to aggressive presets
 
 # ---------------------------------------------------------------------------
 # Core move-selection logic
 # ---------------------------------------------------------------------------
 
-def _fallback_move(board: chess.Board) -> str:
-    """Return the first legal UCI move. Never raises."""
-    legal = list(board.legal_moves)
-    return legal[0].uci() if legal else ""
+def _get_aggressive_commentary(score: float, fen: str) -> str:
+    """Heuristic commentary based on evaluation and board state."""
+    board = chess.Board(fen)
 
+    if abs(score) < 0.3:
+        return "Maintaining tension in the center — preparing sharp breakthroughs."
 
-def _stockfish_move(fen: str, skill_level: int) -> Tuple[str, str]:
+    if score > 2.0:
+        return "Total domination — dismantling opponent's kingside structure."
+    if score < -2.0:
+        return "Under pressure but looking for tactical counter-chances."
+
+    # Heuristic for attacks/sacrifices
+    comments = [
+        "Focusing all pieces on the kingside — looking for a sacrifice.",
+        "Aggressive pawn thrust to open lines for the heavy pieces.",
+        "Sacrificing positional stability for immediate tactical threats.",
+        "Sharp tactical line calculated — forcing weaknesses in the castle.",
+        "Exploiting the lack of coordination in opponent's camp."
+    ]
+    return random.choice(comments)
+
+def _stockfish_move(fen: str, request_difficulty: int) -> Tuple[str, str]:
     """
-    Ask Stockfish for the best move and evaluation.
-
-    Returns (uci_move, reasoning_string).
-    Raises on unrecoverable failure — caller must handle.
+    Ask Stockfish for the best move with aggressive tuning.
+    Also implements Move 1 Opening Book.
     """
+    board = chess.Board(fen)
+
+    # --- 1. Opening Book for Sharp Lines (Move 1 Only) ---
+    # Move number is indexed by fullness: move 1 white is full_move_number 1, half_moves 0
+    if board.fullmove_number == 1:
+        if board.turn == chess.WHITE:
+            return "e2e4", "Opening Book: King's Pawn (Sharp/Aggressive)"
+        else:
+            # Black response
+            last_move = board.peek() if board.move_stack else None
+            # If White played e4, respond with Sicilian (c5)
+            if last_move and board.piece_at(last_move.to_square).piece_type == chess.PAWN and last_move.to_square == chess.E4:
+                return "c7c5", "Opening Book: Sicilian Defense (Sharp Counter-attack)"
+            # If White played d4, respond with King's Indian (Nf6)
+            if last_move and board.piece_at(last_move.to_square).piece_type == chess.PAWN and last_move.to_square == chess.D4:
+                return "g8f6", "Opening Book: King's Indian Setup (Aggressive/Complex)"
+
+    # --- 2. Difficulty Remap ---
+    if request_difficulty <= 5:
+        level = 10
+        desc = "Easy (Aggressive)"
+    elif request_difficulty <= 10:
+        level = 15
+        desc = "Medium (Aggressive)"
+    elif request_difficulty <= 15:
+        level = 18
+        desc = "Hard (Aggressive)"
+    else:
+        level = 20
+        desc = "Maximum (Aggressive)"
+
     engine = _get_engine()
-
-    # Clamp skill level
-    level = max(1, min(20, skill_level))
     try:
         engine.set_skill_level(level)
         engine.set_fen_position(fen)
         best = engine.get_best_move()
+        eval_info = engine.get_evaluation()
     except StockfishException:
-        # Engine died — restart it and try ONE more time
         engine = _reset_engine()
         engine.set_skill_level(level)
         engine.set_fen_position(fen)
         best = engine.get_best_move()
+        eval_info = engine.get_evaluation()
 
     if not best:
         raise ValueError("Stockfish returned no move")
 
-    # Evaluation string for reasoning
+    # --- 3. Enhanced Reasoning & Commentary ---
     try:
-        eval_info = engine.get_evaluation()
         if eval_info.get("type") == "cp":
             score = eval_info["value"] / 100.0
             sign = "+" if score >= 0 else ""
-            reasoning = f"Stockfish eval: {sign}{score:.2f} (skill {level}/20)"
+            commentary = _get_aggressive_commentary(score, fen)
+            reasoning = f"Stockfish eval: {sign}{score:.2f} | {commentary} | Mode: {desc}"
         elif eval_info.get("type") == "mate":
-            reasoning = f"Stockfish: Mate in {eval_info['value']} (skill {level}/20)"
+            reasoning = f"MATE IN {abs(eval_info['value'])} | Forcing the final blow! | Mode: {desc}"
         else:
-            reasoning = f"Stockfish move (skill {level}/20)"
+            reasoning = f"Aggressive maneuver found | Mode: {desc}"
     except Exception:
-        reasoning = f"Stockfish move (skill {level}/20)"
+        reasoning = f"Stockfish move (Skill {level})"
 
     return best, reasoning
 
+def _fallback_move(board: chess.Board) -> str:
+    legal = list(board.legal_moves)
+    return legal[0].uci() if legal else ""
 
 # ---------------------------------------------------------------------------
 # Endpoints
@@ -176,50 +219,34 @@ async def make_move(request: MoveRequest):
     if board.is_game_over():
         return {"error": "Game is already over"}, 400
 
-    move_uci: str = ""
-    reasoning: str = ""
-
-    # --- Primary: Stockfish (lock prevents concurrent subprocess corruption) ---
     async with _engine_lock:
         try:
             move_uci, reasoning = _stockfish_move(request.board, request.difficulty)
-        except (StockfishException, ValueError, Exception) as exc:
-            logger.error("Stockfish failed (%s); falling back to first legal move", exc)
+        except Exception as exc:
+            logger.error("Stockfish failed (%s); falling back", exc)
             move_uci = _fallback_move(board)
-            reasoning = f"Fallback: first legal move (Stockfish error: {type(exc).__name__})"
+            reasoning = f"Fallback: legal move (Engine logic error)"
 
-    # --- Safety net: ensure the move is strictly legal ---
+    # Safety validation
     try:
         candidate = chess.Move.from_uci(move_uci)
         if candidate not in board.legal_moves:
-            raise ValueError("Illegal move returned by engine")
-    except Exception as exc:
-        logger.error("Move validation failed (%s); using fallback.", exc)
+            raise ValueError("Illegal move")
+    except Exception:
         move_uci = _fallback_move(board)
-        reasoning = "Fallback: first legal move (move failed validation)"
-
-    if not move_uci:
-        return {"error": "No legal moves available"}, 400
+        reasoning = "Fallback: legal move (validation failed)"
 
     return {"move": move_uci, "reasoning": reasoning}
-
 
 @app.get("/health")
 async def get_health():
     engine = _get_engine()
-    # Read current skill level from engine parameters
     try:
         params = engine.get_parameters()
         skill = params.get("Skill Level", 10)
     except Exception:
-        skill = STOCKFISH_PARAMS["Skill Level"]
-
-    return {"status": "ok", "agent": "chess-agent-stockfish", "skill_level": skill}
-
-
-# ---------------------------------------------------------------------------
-# Entry point
-# ---------------------------------------------------------------------------
+        skill = -1
+    return {"status": "ok", "agent": "aggressive-stockfish", "skill_level": skill}
 
 if __name__ == "__main__":
     import uvicorn

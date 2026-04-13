@@ -52,7 +52,7 @@ def choose_move(board: chess.Board, my_color: chess.Color):
             # En passant capture logic
             if not captured_piece and board.is_en_passant(move):
                 captured_piece = chess.Piece(chess.PAWN, not my_color)
-                
+
             if captured_piece:
                 gain = piece_value(captured_piece)
                 # Check if this square can be recaptured (unsafe)
@@ -60,12 +60,12 @@ def choose_move(board: chess.Board, my_color: chess.Color):
                 # If the square is attacked by the opponent, subtract our attacker's value
                 if board.is_attacked_by(not my_color, move.to_square):
                     gain -= piece_value(board.piece_at(move.to_square))
-                    
+
                 if gain > max_net_gain:
                     max_net_gain = gain
                     best_capture_move = move
                 board.pop()
-                
+
     if best_capture_move and max_net_gain > 0:
         return best_capture_move, f"Capturing piece for material gain"
 
@@ -86,7 +86,7 @@ def choose_move(board: chess.Board, my_color: chess.Color):
                             max_attacked_val = pval
                             best_protect_move = move
                         board.pop()
-                        
+
     if best_protect_move:
         return best_protect_move, "Protecting piece from capture"
 
@@ -109,7 +109,7 @@ def choose_move(board: chess.Board, my_color: chess.Color):
                 return move, "Developing minor piece in the opening"
 
     # Priority 7: Castle if available
-    # Actually, castling should probably happen before developing ALL pieces, 
+    # Actually, castling should probably happen before developing ALL pieces,
     # but strictly following priority check order:
     if board.has_castling_rights(my_color):
         for move in legal_moves:
@@ -144,14 +144,14 @@ async def make_move(request: MoveRequest):
         raise HTTPException(status_code=400, detail="Wrong side to move")
 
     move, reasoning = choose_move(board, expected_color)
-    
+
     # 1. ILLEGAL MOVES & 2. SELF CHECK Fallback wrapper
     if move not in board.legal_moves:
         legal_list = list(board.legal_moves)
         if legal_list:
             move = legal_list[0]
             reasoning = "Fallback to first legal move due to illegal move selection"
-            
+
     # 3. INFINITE LOOPS IN MIRROR GAMES (Threefold repetition detection)
     if move in board.legal_moves:
         board.push(move)

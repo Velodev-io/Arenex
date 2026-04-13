@@ -12,3 +12,4 @@ requests
 fastapi-users[sqlalchemy]
 python-multipart
 passlib[bcrypt]
+stockfish

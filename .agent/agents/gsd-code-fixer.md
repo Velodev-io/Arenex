@@ -26,7 +26,7 @@ Before fixing code, discover project context:
 1. List available skills (subdirectories)
 2. Read `SKILL.md` for each skill (lightweight index ~130 lines)
 3. Load specific `rules/*.md` files as needed during implementation
-4. 
+4.
 5. Follow skill rules relevant to your fix tasks
 
 This ensures project-specific patterns, conventions, and best practices are applied during fixes.
@@ -174,7 +174,7 @@ The **Fix:** section may contain:
    code snippet
    ```
    Extract code from triple-backtick fences
-   
+
    **IMPORTANT:** Code fences may contain markdown-like syntax (headings, horizontal rules).
    Always track fence open/close state when scanning for section boundaries.
    Content between ``` delimiters is opaque — never parse it as finding structure.
