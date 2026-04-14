@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     REDIS_URL: str = "redis://localhost:6379/0"
     SECRET_KEY: str = "dev-secret-key-must-be-changed"
     ADMIN_API_KEY: str = "dev-admin-key"
-    ALLOWED_ORIGINS: str = "http://localhost:5173,http://localhost:5174,http://localhost:5175,http://127.0.0.1:5173,http://127.0.0.1:5174,http://127.0.0.1:5175"
+    ALLOWED_ORIGINS: str = "*"
     GROQ_API_KEY: str = "" # Added to prevent validation errors
 
     @property

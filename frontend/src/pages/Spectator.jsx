@@ -2,6 +2,9 @@ import { useState, useEffect, useRef, useMemo } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import ChessBoard from '../components/ChessBoard';
 import TTTBoard from '../components/TTTBoard';
+import MinecraftMap from '../components/MinecraftMap';
+import MinecraftMatchStats from '../components/MinecraftMatchStats';
+import { FullPageLoader } from '../components/LoadingButton';
 
 const INITIAL_FEN = "rnbqkbnr/1ppppppp/8/8/8/8/1PPPPPPP/RNBQKBNR w KQkq - 0 1";
 
@@ -23,6 +26,13 @@ const Spectator = () => {
   }, [followLive]);
   const [currentFen, setCurrentFen] = useState(INITIAL_FEN);
   
+  // Minecraft State
+  const [bot1, setBot1] = useState(null);
+  const [bot2, setBot2] = useState(null);
+  const [timeRemaining, setTimeRemaining] = useState(600);
+  const [timeline, setTimeline] = useState([]);
+  const [viewerUrl, setViewerUrl] = useState(null);
+  
   // Social State
   const [likes, setLikes] = useState(0);
   const [comments, setComments] = useState([]);
@@ -36,39 +46,6 @@ const Spectator = () => {
   const isReplayUrl = location.pathname.endsWith('/replay');
 
   useEffect(() => {
-    // 1. Fetch initial match state
-    const fetchMatch = async () => {
-      try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/matches/${id}`);
-        if (!response.ok) throw new Error(`HTTP ${response.status} Match fetch failed`);
-        const data = await response.json();
-        setMatch(data);
-        const fetchedHistory = data.history || [];
-        setHistory(fetchedHistory);
-        const fetchedMoves = fetchedHistory.filter(h => h.move !== undefined);
-        
-        // Handle initial view position
-        if (isReplayUrl) {
-          setFollowLive(false);
-          const firstIdx = fetchedMoves.length > 0 ? 0 : -1;
-          setViewIndex(firstIdx);
-          setCurrentFen(fetchedMoves[0]?.fen || INITIAL_FEN);
-        } else {
-          setFollowLive(true);
-          const lastIdx = fetchedMoves.length - 1;
-          setViewIndex(lastIdx);
-          setCurrentFen(fetchedMoves[lastIdx]?.fen || INITIAL_FEN);
-        }
-
-        // Fetch Social Stats
-        fetchSocial();
-      } catch (err) {
-        console.error('Error fetching match:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     const fetchSocial = async () => {
       try {
         const res = await fetch(`${import.meta.env.VITE_API_URL}/social/${id}/stats`);
@@ -81,52 +58,170 @@ const Spectator = () => {
       }
     };
 
-    fetchMatch();
-
-    // 2. Connect to WebSocket
-    let didCleanup = false;
-    const wsBaseUrl = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace(/^http/, 'ws') : 'ws://localhost:8000';
-    const wsUrl = `${wsBaseUrl}/ws/matches/${id}`;
-    const socket = new WebSocket(wsUrl);
-    ws.current = socket;
-
-    socket.onopen = () => { if (!didCleanup) setStatus('live'); };
-    socket.onclose = () => { if (!didCleanup) setStatus('disconnected'); };
-    socket.onerror = (err) => console.error('WebSocket error:', err);
-    socket.onmessage = (event) => {
-      if (didCleanup) return;
+    const fetchMinecraftTimeline = async () => {
       try {
-        const message = JSON.parse(event.data);
-      
-      if (message.type === 'catchup') {
-        const newHistory = (message.history || []).filter(h => h.move !== undefined);
-        setHistory(newHistory);
-        if (newHistory.length > 0) {
-          const lastMove = newHistory[newHistory.length - 1];
-          setCurrentFen(lastMove.fen || INITIAL_FEN);
-          setViewIndex(newHistory.length - 1);
-        }
-      } else if (message.type === 'move') {
-        const moveData = message.data;
-        if (!moveData || !moveData.move) return;
-        setHistory(prev => {
-          const next = [...prev, moveData];
-          setCurrentFen(moveData.fen || INITIAL_FEN);
-          setViewIndex(next.length - 1);
-          return next;
-        });
-      } else if (message.type === 'finished') {
-        setStatus('finished');
-        setMatch(prev => ({ ...prev, status: 'finished', result: message.result }));
-      }
-      } catch (e) {
-        console.error('Failed to parse websocket message:', e);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/matches/${id}/minecraft/replay`);
+        if (!response.ok) throw new Error(`HTTP ${response.status} Minecraft replay fetch failed`);
+        const data = await response.json();
+        return data.timeline || [];
+      } catch (err) {
+        console.error('Error fetching minecraft replay:', err);
+        return [];
       }
     };
 
+    const fetchMatch = async () => {
+      try {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/matches/${id}`);
+        if (!response.ok) throw new Error(`HTTP ${response.status} Match fetch failed`);
+        const data = await response.json();
+        setMatch(data);
+
+        const fetchedHistory = data.history || [];
+        setHistory(fetchedHistory);
+
+        let fetchedTimeline = [];
+        if (data.game_type === 'minecraft_wood_race' && (isReplayUrl || data.status === 'finished')) {
+          fetchedTimeline = await fetchMinecraftTimeline();
+        }
+        setTimeline(fetchedTimeline);
+
+        if (data.game_type === 'minecraft_wood_race') {
+          setViewerUrl(null);
+          if (isReplayUrl) {
+            setFollowLive(false);
+            setViewIndex(fetchedTimeline.length > 0 ? 0 : -1);
+          } else {
+            setFollowLive(true);
+            setViewIndex(fetchedTimeline.length > 0 ? fetchedTimeline.length - 1 : -1);
+          }
+        } else {
+          const fetchedMoves = fetchedHistory.filter(h => h.move !== undefined);
+          if (isReplayUrl) {
+            setFollowLive(false);
+            const firstIdx = fetchedMoves.length > 0 ? 0 : -1;
+            setViewIndex(firstIdx);
+            setCurrentFen(fetchedMoves[0]?.fen || INITIAL_FEN);
+          } else {
+            setFollowLive(true);
+            const lastIdx = fetchedMoves.length - 1;
+            setViewIndex(lastIdx);
+            setCurrentFen(fetchedMoves[lastIdx]?.fen || INITIAL_FEN);
+          }
+        }
+
+        await fetchSocial();
+        return data;
+      } catch (err) {
+        console.error('Error fetching match:', err);
+        return null;
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    const connectStandardWS = (url) => {
+      const socket = new WebSocket(url);
+      ws.current = socket;
+      socket.onopen = () => { if (!didCleanup) setStatus('live'); };
+      socket.onclose = () => { if (!didCleanup) setStatus('disconnected'); };
+      socket.onerror = (err) => console.error('WebSocket error:', err);
+      socket.onmessage = (event) => {
+        if (didCleanup) return;
+        try {
+          const message = JSON.parse(event.data);
+          if (message.type === 'catchup') {
+            const newHistory = (message.history || []).filter(h => h.move !== undefined);
+            setHistory(newHistory);
+            if (newHistory.length > 0) {
+              const lastMove = newHistory[newHistory.length - 1];
+              setCurrentFen(lastMove.fen || INITIAL_FEN);
+              if (followLiveRef.current) setViewIndex(newHistory.length - 1);
+            }
+          } else if (message.type === 'move') {
+            const moveData = message.data;
+            if (!moveData || !moveData.move) return;
+            setHistory(prev => {
+              const next = [...prev, moveData];
+              if (followLiveRef.current) {
+                setCurrentFen(moveData.fen || INITIAL_FEN);
+                setViewIndex(next.length - 1);
+              }
+              return next;
+            });
+          } else if (message.type === 'finished') {
+            setStatus('finished');
+            setMatch(prev => ({ ...prev, status: 'finished', result: message.result }));
+          }
+        } catch (e) {
+          console.error('Failed to parse websocket message:', e);
+        }
+      };
+      return socket;
+    };
+
+    const connectMinecraftWS = (url) => {
+      const socket = new WebSocket(url);
+      ws.current = socket;
+      socket.onopen = () => { if (!didCleanup) setStatus('live'); };
+      socket.onclose = () => { if (!didCleanup) setStatus('disconnected'); };
+      socket.onerror = (err) => console.error('WebSocket error:', err);
+      socket.onmessage = (event) => {
+        if (didCleanup) return;
+        try {
+          const message = JSON.parse(event.data);
+          if (message.type === 'match_start') {
+            if (message.viewer_url) setViewerUrl(message.viewer_url);
+          } else if (message.type === 'state_update') {
+            console.log("DEBUG: Received viewer_url:", message.viewer_url);
+            const frame = {
+              timestamp: message.time_elapsed ?? 0,
+              bot1: message.bot1,
+              bot2: message.bot2,
+            };
+            if (message.viewer_url && !viewerUrl) setViewerUrl(message.viewer_url);
+            setBot1(message.bot1);
+            setBot2(message.bot2);
+            setTimeRemaining(message.time_remaining ?? 600);
+            setTimeline(prev => {
+              const next = [...prev, frame];
+              if (followLiveRef.current) setViewIndex(next.length - 1);
+              return next;
+            });
+          } else if (message.type === 'match_end') {
+            setStatus('finished');
+            setMatch(prev => ({ ...prev, status: 'finished', result: message.winner }));
+          }
+        } catch (e) {
+          console.error('Failed to parse websocket message:', e);
+        }
+      };
+      return socket;
+    };
+
+    let didCleanup = false;
+    let socket = null;
+    const wsBaseUrl = import.meta.env.VITE_API_URL ? import.meta.env.VITE_API_URL.replace(/^http/, 'ws') : 'ws://localhost:8000';
+
+    const init = async () => {
+      const data = await fetchMatch();
+      if (!data || didCleanup || isReplayUrl || data.status === 'finished') {
+        if (data?.status === 'finished') setStatus('finished');
+        return;
+      }
+
+      if (data.game_type === 'minecraft_wood_race') {
+        socket = connectMinecraftWS(`${wsBaseUrl}/ws/matches/${id}/minecraft`);
+      } else {
+        socket = connectStandardWS(`${wsBaseUrl}/ws/matches/${id}`);
+      }
+    };
+
+    init();
+
     return () => {
       didCleanup = true;
-      if (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING) {
+      if (socket && (socket.readyState === WebSocket.OPEN || socket.readyState === WebSocket.CONNECTING)) {
         socket.close();
       }
       if (playbackTimer.current) clearInterval(playbackTimer.current);
@@ -134,57 +229,85 @@ const Spectator = () => {
   }, [id, isReplayUrl]);
 
   const moveHistory = useMemo(() => history.filter(h => h.move !== undefined), [history]);
+  const isMinecraft = match?.game_type === 'minecraft_wood_race';
+  const currentTimelineEntry = viewIndex >= 0 ? timeline[viewIndex] : null;
+  const playbackLength = isMinecraft ? timeline.length : moveHistory.length;
+  const isLocalHost = typeof window !== 'undefined' && ['localhost', '127.0.0.1'].includes(window.location.hostname);
 
-  // Sync viewIndex when history updates and followLive is on (fallback for REST-loaded state)
+  // Sync viewIndex when standard move history updates and followLive is on
   useEffect(() => {
-    if (followLive && moveHistory.length > 0) {
+    if (!isMinecraft && followLive && moveHistory.length > 0) {
       const lastIdx = moveHistory.length - 1;
       setViewIndex(lastIdx);
       const lastFen = moveHistory[lastIdx]?.fen;
       if (lastFen) setCurrentFen(lastFen);
     }
-  }, [moveHistory.length, followLive]);
+  }, [isMinecraft, moveHistory, followLive]);
+
+  // Sync viewIndex for live Minecraft updates
+  useEffect(() => {
+    if (isMinecraft && followLive && timeline.length > 0) {
+      setViewIndex(timeline.length - 1);
+    }
+  }, [isMinecraft, timeline, followLive]);
 
   // Keep currentFen in sync when user scrubs history manually
   useEffect(() => {
+    if (isMinecraft) return;
     if (viewIndex >= 0 && moveHistory[viewIndex]?.fen) {
       setCurrentFen(moveHistory[viewIndex].fen);
     } else if (viewIndex === -1) {
       setCurrentFen(INITIAL_FEN);
     }
-  }, [viewIndex, moveHistory]);
+  }, [isMinecraft, viewIndex, moveHistory]);
 
   // Auto-playback logic
   useEffect(() => {
+    if (!match) return;
     if (isAutoPlaying) {
       playbackTimer.current = setInterval(() => {
         setViewIndex(prev => {
-          if (prev < moveHistory.length - 1) return prev + 1;
+          const maxIdx = playbackLength - 1;
+          if (prev < maxIdx) return prev + 1;
           setIsAutoPlaying(false);
           return prev;
         });
-      }, 1000);
-    } else {
-      if (playbackTimer.current) clearInterval(playbackTimer.current);
+      }, isMinecraft ? 500 : 1000);
+    } else if (playbackTimer.current) {
+      clearInterval(playbackTimer.current);
     }
     return () => { if (playbackTimer.current) clearInterval(playbackTimer.current); };
-  }, [isAutoPlaying, moveHistory.length]);
+  }, [isAutoPlaying, playbackLength, isMinecraft, match]);
 
-  if (loading) return <div className="container" style={{ textAlign: 'center', padding: '100px' }}>Loading Match Data...</div>;
-  if (!match) return <div className="container" style={{ textAlign: 'center', padding: '100px' }}>Match not found.</div>;
+  if (loading) return <FullPageLoader message="SYNCHRONIZING WITH MATCH..." />;
+  if (!match) return <FullPageLoader message="MATCH NOT FOUND" />;
 
   const currentMove = viewIndex >= 0 ? moveHistory[viewIndex] : null;
-  const currentTTT = currentMove?.board || [["","",""],["","",""],["",'',""]];
-  const lastReasoning = currentMove?.reasoning || (viewIndex === -1 ? "Initial configuration." : "No move selected.");
+  const currentTTT = currentMove?.board || [["","",""],["","",""],["","",""]];
+  const lastReasoning = isMinecraft
+    ? (currentTimelineEntry ? `Minecraft state at ${Math.round(currentTimelineEntry.timestamp)}s.` : "Initial Minecraft state.")
+    : (currentMove?.reasoning || (viewIndex === -1 ? "Initial configuration." : "No move selected."));
 
   const step = (delta) => {
     setFollowLive(false);
     setIsAutoPlaying(false);
     setViewIndex(prev => {
       const next = prev + delta;
-      return Math.max(-1, Math.min(next, moveHistory.length - 1));
+      return Math.max(-1, Math.min(next, playbackLength - 1));
     });
   };
+
+  const historyItems = isMinecraft
+    ? timeline.map((frame, index) => ({
+        key: index,
+        label: `${Math.round(frame.timestamp)}s`,
+        value: `${frame.bot1?.wood_count || 0}-${frame.bot2?.wood_count || 0}`,
+      }))
+    : moveHistory.map((entry, index) => ({
+        key: index,
+        label: `${index + 1}. ${entry.agent}`,
+        value: typeof entry.move === 'string' ? entry.move : entry.move ? `(${entry.move.row}, ${entry.move.col})` : '',
+      }));
 
   const handleLike = async () => {
     try {
@@ -228,12 +351,44 @@ const Spectator = () => {
           </div>
           <div style={{ textAlign: 'right' }}>
             <div style={{ fontWeight: 'bold' }}>{match.agent_white_id} vs {match.agent_black_id}</div>
-            <div style={{ fontSize: '12px', color: 'var(--text-dim)' }}>{moveHistory.length} Total Moves</div>
+            <div style={{ fontSize: '12px', color: 'var(--text-dim)' }}>
+              {playbackLength} {isMinecraft ? 'Total Frames' : 'Total Moves'}
+            </div>
           </div>
         </div>
 
         <div className="card" style={{ padding: '30px', marginBottom: '15px' }}>
-          {(match.game_type === 'chess' || moveHistory[0]?.fen) ? (
+          {match.game_type === 'minecraft_wood_race' ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+               {!isLocalHost && (
+                 <div
+                   style={{
+                     padding: '12px 16px',
+                     borderRadius: '8px',
+                     border: '1px solid var(--border)',
+                     backgroundColor: 'rgba(255, 193, 7, 0.12)',
+                     color: '#f5d76e',
+                     fontSize: '14px',
+                     fontWeight: 'bold',
+                   }}
+                 >
+                   Live 3D view is only available when running Arenex locally.
+                 </div>
+               )}
+               <MinecraftMap 
+                 matchId={id} 
+                 viewerUrl={!isReplayUrl && status === 'live' ? viewerUrl : null}
+                 bot1={!followLive && currentTimelineEntry ? currentTimelineEntry.bot1 : bot1} 
+                 bot2={!followLive && currentTimelineEntry ? currentTimelineEntry.bot2 : bot2} 
+               />
+               <MinecraftMatchStats 
+                 bot1={!followLive && currentTimelineEntry ? currentTimelineEntry.bot1 : bot1} 
+                 bot2={!followLive && currentTimelineEntry ? currentTimelineEntry.bot2 : bot2} 
+                 timeRemaining={!followLive && currentTimelineEntry ? 600 - currentTimelineEntry.timestamp : timeRemaining}
+                 matchId={id}
+               />
+            </div>
+          ) : (match.game_type === 'chess' || moveHistory[0]?.fen) ? (
             <ChessBoard fen={currentFen} />
           ) : (
             <TTTBoard board={currentTTT} />
@@ -252,11 +407,11 @@ const Spectator = () => {
             {isAutoPlaying ? 'PAUSE' : 'PLAY'}
           </button>
           
-          <button onClick={() => step(1)} disabled={viewIndex >= moveHistory.length - 1} title="Next Move">&gt;</button>
+          <button onClick={() => step(1)} disabled={viewIndex >= playbackLength - 1} title="Next Move">&gt;</button>
           <button onClick={() => { setFollowLive(true); setIsAutoPlaying(false); }} title="Live / End">&gt;|</button>
           
           <div style={{ marginLeft: '20px', color: 'var(--text-dim)', fontSize: '14px' }}>
-            {viewIndex === -1 ? 'Initial' : `Move ${viewIndex + 1} / ${moveHistory.length}`}
+            {viewIndex === -1 ? 'Initial' : `${isMinecraft ? 'Frame' : 'Move'} ${viewIndex + 1} / ${playbackLength}`}
           </div>
         </div>
 
@@ -335,11 +490,13 @@ const Spectator = () => {
         </div>
 
         <div className="card" style={{ padding: '0', flexGrow: 1, minHeight: '400px', display: 'flex', flexDirection: 'column' }}>
-          <h5 style={{ padding: '15px 15px 10px', color: 'var(--text-dim)', textTransform: 'uppercase', fontSize: '11px', borderBottom: '1px solid var(--border)' }}>Move History</h5>
+          <h5 style={{ padding: '15px 15px 10px', color: 'var(--text-dim)', textTransform: 'uppercase', fontSize: '11px', borderBottom: '1px solid var(--border)' }}>
+            {isMinecraft ? 'Timeline' : 'Move History'}
+          </h5>
           <div style={{ overflowY: 'auto', flexGrow: 1, maxHeight: '500px' }}>
-            {moveHistory.map((h, i) => (
+            {historyItems.map((item, i) => (
               <div 
-                key={i} 
+                key={item.key} 
                 onClick={() => { setViewIndex(i); setFollowLive(false); setIsAutoPlaying(false); }}
                 style={{ 
                   padding: '10px 15px', 
@@ -351,11 +508,15 @@ const Spectator = () => {
                   borderLeft: viewIndex === i ? '3px solid var(--accent)' : '3px solid transparent'
                 }}
               >
-                <span style={{ color: viewIndex === i ? 'var(--accent)' : 'var(--text)' }}>{i + 1}. {h.agent}</span>
-                <span style={{ fontFamily: 'monospace', color: 'var(--text-dim)' }}>{typeof h.move === 'string' ? h.move : h.move ? `(${h.move.row}, ${h.move.col})` : ''}</span>
+                <span style={{ color: viewIndex === i ? 'var(--accent)' : 'var(--text)' }}>{item.label}</span>
+                <span style={{ fontFamily: 'monospace', color: 'var(--text-dim)' }}>{item.value}</span>
               </div>
             ))}
-            {moveHistory.length === 0 && <div style={{ padding: '20px', color: 'var(--text-dim)', textAlign: 'center' }}>No moves yet.</div>}
+            {historyItems.length === 0 && (
+              <div style={{ padding: '20px', color: 'var(--text-dim)', textAlign: 'center' }}>
+                {isMinecraft ? 'No timeline samples yet.' : 'No moves yet.'}
+              </div>
+            )}
             <div style={{ padding: '15px', textAlign: 'center' }}>
                <button 
                  onClick={() => { setFollowLive(true); setIsAutoPlaying(false); }}
