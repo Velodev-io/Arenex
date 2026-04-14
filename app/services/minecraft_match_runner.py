@@ -19,7 +19,7 @@ DEFAULT_BOT_SCRIPT_PATH = REPO_ROOT / "minecraft" / "agent-template" / "src" / "
 
 def resolve_bot_script_path(script_path: str | None) -> str:
     if script_path:
-        path = Path(script_path)
+        path = Path(script_path).expanduser()
         if not path.is_absolute():
             repo_relative = (REPO_ROOT / path).resolve()
             runner_relative = (RUNNER_PATH.parent / path).resolve()
@@ -87,6 +87,7 @@ async def run_minecraft_match(match_id: int) -> None:
     command = build_minecraft_runner_command(match_id, bot1, bot2)
     logger.info("Launching Minecraft runner for match %s: %s", match_id, command)
 
+    RUNNER_LOG_PATH.parent.mkdir(parents=True, exist_ok=True)
     with RUNNER_LOG_PATH.open("ab") as runner_log:
         process = await asyncio.create_subprocess_exec(
             *command,
