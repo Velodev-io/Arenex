@@ -76,6 +76,15 @@ function registerBotEventHandlers() {
       botState.last_error = err.message;
       console.error('Wood collector crashed:', err);
     });
+
+    if (VIEWER_PORT > 0) {
+      try {
+        mineflayerViewer(bot, { port: VIEWER_PORT });
+        console.log(`Prismarine viewer started on port ${VIEWER_PORT}`);
+      } catch (err) {
+        console.error('Failed to start Prismarine viewer:', err);
+      }
+    }
   });
 
   bot.on('physicsTick', updateBotState);
