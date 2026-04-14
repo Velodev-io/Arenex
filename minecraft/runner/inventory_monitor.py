@@ -9,10 +9,12 @@ from config import WOOD_WIN_CONDITION
 logger = logging.getLogger(__name__)
 
 class InventoryMonitor:
-    def __init__(self, bot1: BotProcess, bot2: BotProcess):
+    def __init__(self, bot1: BotProcess, bot2: Optional[BotProcess] = None):
         self.bot1 = bot1
         self.bot2 = bot2
-        self.consecutive_failures = {bot1.bot_name: 0, bot2.bot_name: 0}
+        self.consecutive_failures = {bot1.bot_name: 0}
+        if bot2:
+            self.consecutive_failures[bot2.bot_name] = 0
 
     def normalize_status(self, bot: BotProcess, status: dict) -> dict:
         wood_count = status.get("wood_count")
@@ -51,14 +53,15 @@ class InventoryMonitor:
         return None
 
     async def poll_once(self) -> dict:
-        results = await asyncio.gather(
-            self.get_status(self.bot1),
-            self.get_status(self.bot2)
-        )
+        calls = [self.get_status(self.bot1)]
+        if self.bot2:
+            calls.append(self.get_status(self.bot2))
+        
+        results = await asyncio.gather(*calls)
         
         return {
             "bot1": results[0],
-            "bot2": results[1],
+            "bot2": results[1] if self.bot2 else None,
             "timestamp": int(time.time())
         }
     
@@ -74,8 +77,8 @@ class InventoryMonitor:
         # Check for forfeit (3 fails)
         if self.consecutive_failures[self.bot1.bot_name] >= 3:
             logger.info(f"{self.bot1.bot_name} forfeited due to connectivity.")
-            return "bot2"
-        if self.consecutive_failures[self.bot2.bot_name] >= 3:
+            return "bot2" if self.bot2 else "draw"
+        if self.bot2 and self.consecutive_failures[self.bot2.bot_name] >= 3:
             logger.info(f"{self.bot2.bot_name} forfeited due to connectivity.")
             return "bot1"
 

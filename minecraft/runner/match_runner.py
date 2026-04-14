@@ -127,19 +127,25 @@ async def main():
 
     viewer_port = calculate_viewer_port(args.match_id)
     viewer_url = f"http://{VIEWER_HOST}:{viewer_port}"
+    # TESTING: Bot2 disabled
     bot1 = BotProcess(args.bot1_name, BOT_API_BASE_PORT, args.match_id, args.bot1_script, viewer_port=viewer_port)
-    bot2 = BotProcess(args.bot2_name, BOT_API_BASE_PORT + 1, args.match_id, args.bot2_script, viewer_port=0)
+    # bot2 = BotProcess(args.bot2_name, BOT_API_BASE_PORT + 1, args.match_id, args.bot2_script, viewer_port=0)
 
-    success1, success2 = await asyncio.gather(bot1.start(), bot2.start())
+    # TESTING: Bot2 disabled
+    # success1, success2 = await asyncio.gather(bot1.start(), bot2.start())
+    success1 = await bot1.start()
+    success2 = True
 
-    if not success1 or not success2:
+    if not success1:
         console.print("[bold red]One or both bots failed to start. Aborting match.[/bold red]")
         await bot1.stop()
-        await bot2.stop()
+        # TESTING: Bot2 disabled
+        # await bot2.stop()
         await report_result(args.match_id, "draw", args.bot1_name, args.bot2_name, args.bot1_agent_id, args.bot2_agent_id, 0, 0, 0, "bot_failed_to_start")
         return
 
-    monitor = InventoryMonitor(bot1, bot2)
+    # TESTING: Bot2 disabled (Pass None for Bot2)
+    monitor = InventoryMonitor(bot1, None)
     start_time = time.time()
     winner = None
     reason = "wood_collected"
@@ -221,7 +227,8 @@ async def main():
         console.print(f"\n[bold yellow]Match Finished![/bold yellow] Result: {winner} Reason: {reason}")
         
         await bot1.stop()
-        await bot2.stop()
+        # TESTING: Bot2 disabled
+        # await bot2.stop()
 
         # Extract final wood counts
         fw1 = final_poll.get("bot1", {}).get("wood_count", 0) if final_poll.get("bot1") else 0
