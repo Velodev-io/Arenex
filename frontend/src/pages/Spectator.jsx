@@ -210,8 +210,8 @@ const Spectator = () => {
         return;
       }
 
-      if (data.game_type === 'minecraft_wood_race') {
-        socket = connectMinecraftWS(`${wsBaseUrl}/ws/matches/${id}/minecraft`);
+      if ((location.state?.game_type || data.game_type) === 'minecraft_wood_race') {
+        socket = connectMinecraftWS(`${wsBaseUrl}/ws/matches/${id}`);
       } else {
         socket = connectStandardWS(`${wsBaseUrl}/ws/matches/${id}`);
       }
@@ -229,7 +229,7 @@ const Spectator = () => {
   }, [id, isReplayUrl]);
 
   const moveHistory = useMemo(() => history.filter(h => h.move !== undefined), [history]);
-  const isMinecraft = match?.game_type === 'minecraft_wood_race';
+  const isMinecraft = (location.state?.game_type || match?.game_type) === 'minecraft_wood_race';
   const currentTimelineEntry = viewIndex >= 0 ? timeline[viewIndex] : null;
   const playbackLength = isMinecraft ? timeline.length : moveHistory.length;
   const isLocalHost = typeof window !== 'undefined' && ['localhost', '127.0.0.1'].includes(window.location.hostname);
@@ -358,7 +358,7 @@ const Spectator = () => {
         </div>
 
         <div className="card" style={{ padding: '30px', marginBottom: '15px' }}>
-          {match.game_type === 'minecraft_wood_race' ? (
+          {isMinecraft ? (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                {!isLocalHost && (
                  <div

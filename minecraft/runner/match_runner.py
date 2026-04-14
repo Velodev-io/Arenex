@@ -181,20 +181,23 @@ async def main():
                 final_poll = poll_result
                 live.update(create_status_table(args.match_id, args.bot1_name, args.bot2_name, poll_result, elapsed))
 
+                bot1_data = poll_result.get("bot1") or {}
+                bot2_data = poll_result.get("bot2") or {}
+
                 # Update Timeline
                 sample = {
                     "timestamp": elapsed,
                     "bot1": {
-                        "position": poll_result.get("bot1", {}).get("position"),
-                        "wood_count": poll_result.get("bot1", {}).get("wood_count", 0),
-                        "current_action": poll_result.get("bot1", {}).get("current_action"),
-                        "health": poll_result.get("bot1", {}).get("health", 0)
+                        "position": bot1_data.get("position"),
+                        "wood_count": bot1_data.get("wood_count", 0),
+                        "current_action": bot1_data.get("current_action"),
+                        "health": bot1_data.get("health", 0)
                     },
                     "bot2": {
-                        "position": poll_result.get("bot2", {}).get("position"),
-                        "wood_count": poll_result.get("bot2", {}).get("wood_count", 0),
-                        "current_action": poll_result.get("bot2", {}).get("current_action"),
-                        "health": poll_result.get("bot2", {}).get("health", 0)
+                        "position": bot2_data.get("position"),
+                        "wood_count": bot2_data.get("wood_count", 0),
+                        "current_action": bot2_data.get("current_action"),
+                        "health": bot2_data.get("health", 0)
                     }
                 }
                 timeline.append(sample)
