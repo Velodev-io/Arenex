@@ -7,7 +7,7 @@ from app.api.matches import router as matches_router
 from app.api.ws import router as ws_router
 from app.api.social import router as social_router
 
-app = FastAPI(title="Arenex Platform")
+app = FastAPI(title="Arenex Platform", redirect_slashes=False)
 
 # CORS configuration
 allowed_origins = [origin.strip() for origin in settings.ALLOWED_ORIGINS.split(",")]
