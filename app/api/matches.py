@@ -53,6 +53,7 @@ async def create_match(match_in: MatchCreate, background_tasks: BackgroundTasks,
     new_match = Match(
         agent_white_id=agent_w.id,
         agent_black_id=agent_b.id,
+        game_type=agent_w.game_type,
         status="live",
         is_practice=False,
         history=[]
