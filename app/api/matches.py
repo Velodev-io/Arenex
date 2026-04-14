@@ -22,7 +22,7 @@ class UserMove(BaseModel):
     fen: Optional[str] = None
     board: Optional[List[List[Any]]] = None
 
-@router.post("/", response_model=MatchRead, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=MatchRead, status_code=status.HTTP_201_CREATED)
 async def create_match(match_in: MatchCreate, background_tasks: BackgroundTasks, db: AsyncSession = Depends(get_db)):
     if match_in.is_practice:
         new_match = Match(
@@ -89,7 +89,7 @@ async def register_user_move(match_id: int, user_move: UserMove, db: AsyncSessio
     await redis.publish(f"match:{match_id}", json.dumps({"type": "move", "data": user_entry}))
 
     # 2. Trigger House Bot (Stockfish for chess, standard rule-based for TTT)
-    bot_url = "http://yashswis-Mac-mini-3.local:8011/move" if match_obj.game_type == "chess" else "http://yashswis-Mac-mini-3.local:8010/move"
+    bot_url = "http://192.168.1.25:8011/move" if match_obj.game_type == "chess" else "http://192.168.1.25:8010/move"
 
     bot_payload = {}
     if match_obj.game_type == "chess":
@@ -149,7 +149,7 @@ async def get_match(match_id: int, db: AsyncSession = Depends(get_db)):
 
     return match_obj
 
-@router.get("/", response_model=List[MatchRead])
+@router.get("", response_model=List[MatchRead])
 async def list_matches(db: AsyncSession = Depends(get_db)):
     # Standard matches only (exclude practice from main feed)
     result = await db.execute(select(Match).where(Match.is_practice == False))

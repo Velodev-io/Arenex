@@ -10,7 +10,7 @@ from app.schemas.agent import AgentCreate, AgentRead
 
 router = APIRouter()
 
-@router.post("/", response_model=AgentRead, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=AgentRead, status_code=status.HTTP_201_CREATED)
 async def register_agent(agent_in: AgentCreate, db: AsyncSession = Depends(get_db)):
     # Verify endpoint is responsive before saving
     ping_url = f"{str(agent_in.endpoint_url).rstrip('/')}/health"
@@ -47,7 +47,7 @@ async def register_agent(agent_in: AgentCreate, db: AsyncSession = Depends(get_d
     await db.refresh(new_agent)
     return new_agent
 
-@router.get("/", response_model=List[AgentRead])
+@router.get("", response_model=List[AgentRead])
 async def list_agents(db: AsyncSession = Depends(get_db)):
     result = await db.execute(select(Agent))
     agents = result.scalars().all()
