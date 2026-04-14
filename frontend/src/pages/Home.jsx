@@ -8,7 +8,7 @@ const Home = () => {
   useEffect(() => {
     const fetchMatches = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/matches/`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/matches`);
         const data = await response.json();
         setMatches(data);
       } catch (error) {

@@ -16,14 +16,14 @@ async def seed():
         bot1 = Agent(
             name="ArenexBot1",
             owner_id=1, # Assume user 1 exists
-            endpoint_url="http://192.168.1.24:8081",
+            endpoint_url="http://192.168.1.25:8081",
             game_type="minecraft_wood_race",
             elo=1200
         )
         bot2 = Agent(
             name="ArenexBot2",
             owner_id=1,
-            endpoint_url="http://192.168.1.24:8082",
+            endpoint_url="http://192.168.1.25:8082",
             game_type="minecraft_wood_race",
             elo=1200
         )
