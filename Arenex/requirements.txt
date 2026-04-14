@@ -1,0 +1,15 @@
+fastapi
+uvicorn[standard]
+pydantic
+python-chess
+sqlalchemy[asyncio]
+asyncpg
+alembic
+pydantic-settings
+redis
+groq
+requests
+fastapi-users[sqlalchemy]
+python-multipart
+passlib[bcrypt]
+stockfish

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic-Tac-Toe - Arenex Platform</title>
+    <style>
+        :root {
+            --bg-main: #121212;
+            --bg-card: #1E1E1E;
+            --text-main: #FFFFFF;
+            --text-sub: #A0A0A0;
+            --accent: #BB86FC;
+            --border: #333333;
+            --cell-size: 100px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            width: 100%;
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--accent);
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .status-panel {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            margin-bottom: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, var(--cell-size));
+            grid-template-rows: repeat(3, var(--cell-size));
+            gap: 10px;
+            background-color: var(--border);
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        .cell {
+            background-color: var(--bg-card);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .cell:hover:not(.taken) {
+            background-color: #2c2c2c;
+        }
+
+        .cell.taken {
+            cursor: default;
+        }
+
+        .cell.X { color: #FF5252; }
+        .cell.O { color: #448AFF; }
+
+        .info-panel {
+            margin-top: 30px;
+            width: 100%;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 20px;
+            min-height: 80px;
+        }
+
+        .info-title {
+            color: var(--text-sub);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .controls {
+            margin-top: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        button {
+            background-color: var(--accent);
+            color: var(--bg-main);
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        button:disabled {
+            background-color: var(--border);
+            color: var(--text-sub);
+            cursor: not-allowed;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1><a href="index.html">Arenex</a></h1>
+        <a href="index.html">← Back</a>
+    </header>
+
+    <div class="container">
+        <div class="status-panel">
+            <span id="player-role">You are: ?</span>
+            <span id="turn-indicator">Turn: ?</span>
+        </div>
+
+        <div class="board" id="board">
+            <!-- 9 cells injected via JS -->
+        </div>
+
+        <div class="info-panel">
+            <div class="info-title">Bot Reasoning</div>
+            <div id="reasoning">Waiting for first move...</div>
+        </div>
+
+        <div class="controls">
+            <button id="new-game-btn" onclick="startNewGame()">New Game</button>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = "http://localhost:8010/move";
+        let boardState = [["", "", ""], ["", "", ""], ["", "", ""]];
+        let playerMark = "X";
+        let botMark = "O";
+        let currentTurn = "X";
+        let gameActive = false;
+        let gameId = "";
+
+        const boardEl = document.getElementById("board");
+        const roleEl = document.getElementById("player-role");
+        const turnEl = document.getElementById("turn-indicator");
+        const reasoningEl = document.getElementById("reasoning");
+
+        // Initialize board UI
+        function createBoard() {
+            boardEl.innerHTML = "";
+            for (let r = 0; r < 3; r++) {
+                for (let c = 0; c < 3; c++) {
+                    const cell = document.createElement("div");
+                    cell.className = "cell";
+                    cell.dataset.r = r;
+                    cell.dataset.c = c;
+                    cell.onclick = () => onCellClick(r, c);
+                    boardEl.appendChild(cell);
+                }
+            }
+        }
+
+        function updateBoardUI() {
+            for (let r = 0; r < 3; r++) {
+                for (let c = 0; c < 3; c++) {
+                    const cell = boardEl.children[r * 3 + c];
+                    const val = boardState[r][c];
+                    cell.innerText = val;
+                    if (val !== "") {
+                        cell.classList.add("taken", val);
+                    } else {
+                        cell.classList.remove("taken", "X", "O");
+                    }
+                }
+            }
+        }
+
+        function checkWin(mark) {
+            const lines = [
+                // Rows
+                [[0,0],[0,1],[0,2]], [[1,0],[1,1],[1,2]], [[2,0],[2,1],[2,2]],
+                // Cols
+                [[0,0],[1,0],[2,0]], [[0,1],[1,1],[2,1]], [[0,2],[1,2],[2,2]],
+                // Diags
+                [[0,0],[1,1],[2,2]], [[0,2],[1,1],[2,0]]
+            ];
+            for (let line of lines) {
+                if (line.every(([r, c]) => boardState[r][c] === mark)) return true;
+            }
+            return false;
+        }
+
+        function isDraw() {
+            for (let r = 0; r < 3; r++) {
+                for (let c = 0; c < 3; c++) {
+                    if (boardState[r][c] === "") return false;
+                }
+            }
+            return true;
+        }
+
+        function finishGame(result) {
+            gameActive = false;
+            let w = parseInt(localStorage.getItem('ttt_wins') || 0);
+            let l = parseInt(localStorage.getItem('ttt_losses') || 0);
+            let d = parseInt(localStorage.getItem('ttt_draws') || 0);
+
+            if (result === 'win') {
+                turnEl.innerText = "You Won!";
+                turnEl.style.color = "#4CAF50";
+                localStorage.setItem('ttt_wins', w + 1);
+            } else if (result === 'loss') {
+                turnEl.innerText = "Bot Won!";
+                turnEl.style.color = "#FF5252";
+                localStorage.setItem('ttt_losses', l + 1);
+            } else if (result === 'draw') {
+                turnEl.innerText = "Draw!";
+                turnEl.style.color = "#FFC107";
+                localStorage.setItem('ttt_draws', d + 1);
+            }
+        }
+
+        async function botMove() {
+            if (!gameActive) return;
+            reasoningEl.innerText = "Thinking...";
+            turnEl.innerText = "Bot's Turn";
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        board: boardState,
+                        your_mark: botMark,
+                        game_id: gameId
+                    })
+                });
+
+                if (!response.ok) throw new Error("API call failed");
+
+                const data = await response.json();
+                boardState[data.row][data.col] = botMark;
+                reasoningEl.innerText = data.reasoning;
+                updateBoardUI();
+
+                if (checkWin(botMark)) {
+                    finishGame('loss');
+                } else if (isDraw()) {
+                    finishGame('draw');
+                } else {
+                    currentTurn = playerMark;
+                    turnEl.innerText = "Your Turn";
+                }
+            } catch (err) {
+                console.error(err);
+                reasoningEl.innerText = "Error: Could not reach bot server.";
+            }
+        }
+
+        async function onCellClick(r, c) {
+            if (!gameActive || currentTurn !== playerMark || boardState[r][c] !== "") return;
+
+            // Player makes a move
+            boardState[r][c] = playerMark;
+            updateBoardUI();
+
+            if (checkWin(playerMark)) {
+                finishGame('win');
+            } else if (isDraw()) {
+                finishGame('draw');
+            } else {
+                currentTurn = botMark;
+                botMove();
+            }
+        }
+
+        function startNewGame() {
+            boardState = [["", "", ""], ["", "", ""], ["", "", ""]];
+            gameId = "game_" + Math.floor(Math.random() * 1000000);
+            updateBoardUI();
+
+            // Random assignment
+            if (Math.random() < 0.5) {
+                playerMark = "X";
+                botMark = "O";
+                currentTurn = "X";
+                roleEl.innerText = "You are: X (First)";
+                turnEl.innerText = "Your Turn";
+                turnEl.style.color = "var(--text-main)";
+                reasoningEl.innerText = "Waiting for your move...";
+                gameActive = true;
+            } else {
+                playerMark = "O";
+                botMark = "X";
+                currentTurn = "X"; // Bot is X, goes first
+                roleEl.innerText = "You are: O (Second)";
+                turnEl.innerText = "Bot's Turn";
+                turnEl.style.color = "var(--text-main)";
+                gameActive = true;
+                botMove();
+            }
+        }
+
+        // Init
+        createBoard();
+        startNewGame();
+    </script>
+</body>
+</html>
