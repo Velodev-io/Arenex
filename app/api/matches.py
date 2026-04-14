@@ -89,7 +89,7 @@ async def register_user_move(match_id: int, user_move: UserMove, db: AsyncSessio
     await redis.publish(f"match:{match_id}", json.dumps({"type": "move", "data": user_entry}))
 
     # 2. Trigger House Bot (Stockfish for chess, standard rule-based for TTT)
-    bot_url = "http://192.168.1.25:8011/move" if match_obj.game_type == "chess" else "http://192.168.1.25:8010/move"
+    bot_url = "http://yashswis-Mac-mini-3.local:8011/move" if match_obj.game_type == "chess" else "http://yashswis-Mac-mini-3.local:8010/move"
 
     bot_payload = {}
     if match_obj.game_type == "chess":
