@@ -1,0 +1,6641 @@
+{
+    "match_id": "123",
+    "game_type": "minecraft_wood_race",
+    "winner_agent_id": "1",
+    "loser_agent_id": "2",
+    "result": "draw",
+    "duration_seconds": 600,
+    "timeline": [
+        {
+            "timestamp": 0.10885310173034668,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 2.317901134490967,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 4.361309051513672,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 6.427393198013306,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 8.489233016967773,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 10.694944143295288,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 12.747682094573975,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 14.792880058288574,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 16.859201192855835,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 19.12912392616272,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 21.333797931671143,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 23.418174982070923,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 25.470957040786743,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 27.596620082855225,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 29.6371750831604,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 31.71331787109375,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 33.795093059539795,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 35.84793186187744,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 37.99665117263794,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 40.14078712463379,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 42.20373201370239,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 44.343101978302,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 46.42332911491394,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 48.481231927871704,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 50.52655911445618,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 52.589943170547485,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 54.68367910385132,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 56.7053861618042,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 58.877965211868286,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 61.01911211013794,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 63.08734393119812,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 65.17067909240723,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 67.2246470451355,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 69.38692998886108,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 71.50705218315125,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 73.59849715232849,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 75.8531129360199,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 77.9243369102478,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 79.98293113708496,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 82.11588215827942,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 84.232980966568,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 86.36018586158752,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 88.44060802459717,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 90.52996802330017,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 92.64335608482361,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 94.74523615837097,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 96.8366379737854,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 98.89758706092834,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 100.99822902679443,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 103.05405020713806,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 105.10778713226318,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 107.15715909004211,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 109.30993604660034,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 111.37127614021301,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 113.4238920211792,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 115.51291799545288,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 117.6163239479065,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 119.68462491035461,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 121.76300811767578,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 123.81402087211609,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 125.86408710479736,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 127.94173192977905,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 130.01098704338074,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 132.05969381332397,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 134.2086420059204,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 136.2636580467224,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 138.31732511520386,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 140.4039921760559,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 142.5456919670105,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 144.64706897735596,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 146.71469283103943,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 148.7692129611969,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 150.81944394111633,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 152.90818786621094,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 155.01263284683228,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 157.07886695861816,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 159.22744393348694,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 161.29526209831238,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 163.4093189239502,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 165.46003317832947,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 167.5114381313324,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 169.56602907180786,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 171.67543411254883,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 173.72768998146057,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 175.77378702163696,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 177.83202481269836,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 179.91227507591248,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 181.9643039703369,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 184.09504795074463,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 186.16774106025696,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 188.22092819213867,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 190.33312392234802,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 192.47205090522766,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 194.5631730556488,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 196.64005613327026,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 198.71468496322632,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 200.84185600280762,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 203.05712008476257,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 205.18159794807434,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 207.21464705467224,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 209.30848908424377,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 211.32255220413208,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 213.3373990058899,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 215.4242582321167,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 217.48401808738708,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 219.61648106575012,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 221.66138410568237,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 223.7536540031433,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 225.80917310714722,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 227.86310601234436,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 230.0015811920166,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 232.07060408592224,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 234.14782285690308,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 236.2094669342041,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 238.3718888759613,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 240.46127700805664,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 242.54625606536865,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 244.61155891418457,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 246.7322461605072,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 248.83048105239868,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 250.9394450187683,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 253.02376198768616,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 255.09856390953064,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 257.2226860523224,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 259.30519795417786,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 261.35955786705017,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 263.4175281524658,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 265.4955039024353,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 267.58093190193176,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 269.6626651287079,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 271.706032037735,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 273.78307700157166,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 275.88125705718994,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 277.98939085006714,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 280.0430328845978,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 282.23310899734497,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 284.3295350074768,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 286.412611246109,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 288.50543212890625,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 290.61216497421265,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 292.6803960800171,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 294.74920988082886,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 296.8010399341583,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 298.8960990905762,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 300.96835589408875,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 303.0642759799957,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 305.12504291534424,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 307.1972198486328,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 309.26559710502625,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 311.33702993392944,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 313.40063285827637,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 315.4576368331909,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 317.544814825058,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 319.67546916007996,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 321.875972032547,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 323.9631838798523,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 326.00392985343933,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 328.07076597213745,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 330.14104199409485,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 332.20708107948303,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 334.245236158371,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 336.3127100467682,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 338.38875102996826,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 340.44733810424805,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 342.6108229160309,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 344.6915521621704,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 346.85986590385437,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 348.92980694770813,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 351.02943205833435,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 353.08530592918396,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 355.19080805778503,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 357.2623178958893,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 359.31266808509827,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 361.38031005859375,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 363.4429278373718,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 365.587336063385,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 367.72205901145935,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 369.744019985199,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 371.7591860294342,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 373.80891704559326,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 375.86441922187805,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 378.00776410102844,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 380.0670659542084,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 382.1290431022644,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 384.2025909423828,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 386.3027341365814,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 388.39227509498596,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 390.44950103759766,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 392.5063078403473,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 394.6465439796448,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 396.70841813087463,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 398.7674751281738,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 400.8176248073578,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 402.99556589126587,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 405.11220622062683,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 407.1541750431061,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 409.2108371257782,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 411.2811908721924,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 413.3510239124298,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 415.42584896087646,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 417.56889605522156,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 419.6283929347992,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 421.7090241909027,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 423.7714309692383,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 425.8252511024475,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 427.99668407440186,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 430.063747882843,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 432.1139199733734,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 434.16851115226746,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 436.30538296699524,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 438.3703272342682,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 440.4668529033661,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 442.5275630950928,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 444.61910796165466,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 446.7091770172119,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 448.8002371788025,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 450.9085168838501,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 453.0226020812988,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 455.11987590789795,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 457.1643760204315,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 459.2819011211395,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 461.37638783454895,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 463.442999124527,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 465.5282471179962,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 467.5777840614319,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 469.65005016326904,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 471.70594215393066,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 473.77278184890747,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 475.91619300842285,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 477.9771888256073,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 480.08843302726746,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 482.1445791721344,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 484.23676085472107,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 486.3040678501129,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 488.4943850040436,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 490.55605006217957,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 492.6031529903412,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 494.6868062019348,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 496.87096190452576,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 498.95009112358093,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 501.0478322505951,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 503.2112431526184,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 505.3768470287323,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 507.45474791526794,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 509.4953329563141,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 511.5375850200653,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 513.6025969982147,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 515.6610519886017,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 517.697056055069,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 519.8136351108551,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 521.9179129600525,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 523.9729459285736,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 526.1378791332245,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 528.2238969802856,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 530.2776091098785,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 532.3357441425323,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 534.4049129486084,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 536.4653220176697,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 538.6368598937988,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 540.7018010616302,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 542.7642991542816,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 544.8292229175568,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 546.9111349582672,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 548.9608368873596,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 551.027195930481,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 553.0403029918671,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 555.0521621704102,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 557.1215200424194,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 559.2923760414124,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 561.3688750267029,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 563.4890739917755,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 565.6096200942993,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 567.8787379264832,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 569.9627861976624,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 572.0250389575958,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 574.1019511222839,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 576.1440200805664,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 578.2147400379181,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 580.2704350948334,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 582.426295042038,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 584.479010105133,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 586.5402619838715,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 588.598317861557,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 590.6465401649475,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 592.7458410263062,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 594.7972600460052,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 596.8599829673767,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        },
+        {
+            "timestamp": 598.9265291690826,
+            "bot1": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            },
+            "bot2": {
+                "position": {
+                    "x": 0,
+                    "y": 0,
+                    "z": 0
+                },
+                "wood_count": 0,
+                "current_action": "finished",
+                "health": 20
+            }
+        }
+    ],
+    "metadata": {
+        "bot1_wood": 0,
+        "bot2_wood": 0,
+        "reason": "time_limit",
+        "bot1_name": "ArenexBot1",
+        "bot2_name": "ArenexBot2"
+    }
+}

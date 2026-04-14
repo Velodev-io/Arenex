@@ -1,13 +1,11 @@
 from fastapi import FastAPI
-from fastapi_users import FastAPIUsers
-
-from app.models import User
-from app.schemas.user import UserRead, UserCreate
-from app.services.user_manager import get_user_manager
-from app.core.auth import auth_backend
-
 from fastapi.middleware.cors import CORSMiddleware
 from app.database import settings
+from app.api.auth import router as auth_router
+from app.api.agents import router as agents_router
+from app.api.matches import router as matches_router
+from app.api.ws import router as ws_router
+from app.api.social import router as social_router
 
 app = FastAPI(title="Arenex Platform")
 
@@ -22,32 +20,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-fastapi_users = FastAPIUsers[User, int](get_user_manager, [auth_backend])
-
+# Authentication Router
 app.include_router(
-    fastapi_users.get_auth_router(auth_backend),
-    prefix="/auth/jwt",
-    tags=["auth"],
-)
-
-app.include_router(
-    fastapi_users.get_register_router(UserRead, UserCreate),
+    auth_router,
     prefix="/auth",
-    tags=["auth"],
+    tags=["auth"]
 )
 
-# Optional: Users router for self-management
-# app.include_router(
-#     fastapi_users.get_users_router(UserRead, UserUpdate),
-#     prefix="/users",
-#     tags=["users"],
-# )
-
-from app.api.agents import router as agents_router
-from app.api.matches import router as matches_router
-from app.api.ws import router as ws_router
-from app.api.social import router as social_router
-
+# Feature Routers
 app.include_router(
     agents_router,
     prefix="/agents",

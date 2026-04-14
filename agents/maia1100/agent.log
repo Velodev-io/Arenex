@@ -1,4 +1,0 @@
-Traceback (most recent call last):
-  File "/Users/binova/Documents/Projects/Suru/Arenex/agents/maia1100/agent.py", line 10, in <module>
-    import chess
-ModuleNotFoundError: No module named 'chess'

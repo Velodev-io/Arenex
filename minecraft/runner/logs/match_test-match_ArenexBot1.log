@@ -1,0 +1,19 @@
+◇ injected env (0) from .env // tip: ⌘ override existing { override: true }
+Agent Template API mapped on port 3001
+Error: connect ETIMEDOUT 192.168.1.24:25565
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16) {
+  errno: -60,
+  code: 'ETIMEDOUT',
+  syscall: 'connect',
+  address: '192.168.1.24',
+  port: 25565
+}
+Mineflayer Socket Error: Error: connect ETIMEDOUT 192.168.1.24:25565
+    at TCPConnectWrap.afterConnect [as oncomplete] (node:net:1705:16) {
+  errno: -60,
+  code: 'ETIMEDOUT',
+  syscall: 'connect',
+  address: '192.168.1.24',
+  port: 25565
+}
+Orchestrator issued /stop. Disconnecting bot...
