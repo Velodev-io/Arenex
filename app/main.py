@@ -20,6 +20,33 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Chrome Private Network Access — allow requests from localhost → LAN IP
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.requests import Request
+
+class PrivateNetworkAccessMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next):
+        response = await call_next(request)
+        response.headers["Access-Control-Allow-Private-Network"] = "true"
+        return response
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] == "http":
+            request = Request(scope, receive)
+            if request.method == "OPTIONS" and "access-control-request-private-network" in request.headers:
+                from starlette.responses import Response
+                response = Response(status_code=204, headers={
+                    "Access-Control-Allow-Private-Network": "true",
+                    "Access-Control-Allow-Origin": request.headers.get("origin", "*"),
+                    "Access-Control-Allow-Methods": "*",
+                    "Access-Control-Allow-Headers": "*",
+                })
+                await response(scope, receive, send)
+                return
+        await super().__call__(scope, receive, send)
+
+app.add_middleware(PrivateNetworkAccessMiddleware)
+
 # Authentication Router
 app.include_router(
     auth_router,
