@@ -83,6 +83,11 @@ const StartMatch = () => {
                 onClick={() => { setGameType('tictactoe'); setAgentW(''); setAgentB(''); }}
                 style={{ flex: 1, backgroundColor: gameType === 'tictactoe' ? 'var(--accent)' : 'var(--bg)', color: gameType === 'tictactoe' ? '#000' : 'var(--text)', border: '1px solid var(--border)' }}
               >Tic-Tac-Toe</button>
+              <button 
+                type="button"
+                onClick={() => { setGameType('minecraft_wood_race'); setAgentW(''); setAgentB(''); }}
+                style={{ flex: 1, backgroundColor: gameType === 'minecraft_wood_race' ? 'var(--accent)' : 'var(--bg)', color: gameType === 'minecraft_wood_race' ? '#000' : 'var(--text)', border: '1px solid var(--border)' }}
+              >Minecraft</button>
             </div>
           </div>
 
