@@ -124,7 +124,7 @@ Show the user:
 
 ### Highlights
 - **Commits:** [N]
-- **Files changed:** [N]  
+- **Files changed:** [N]
 - **Phase progress:** [X]%
 - **Plans executed:** [N]
 ```

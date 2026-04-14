@@ -14,7 +14,7 @@ router = APIRouter()
 async def register_agent(agent_in: AgentCreate, db: AsyncSession = Depends(get_db)):
     # Verify endpoint is responsive before saving
     ping_url = f"{str(agent_in.endpoint_url).rstrip('/')}/health"
-    
+
     try:
         async with httpx.AsyncClient(timeout=5.0) as client:
             response = await client.get(ping_url)
@@ -29,12 +29,12 @@ async def register_agent(agent_in: AgentCreate, db: AsyncSession = Depends(get_d
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=f"Agent health endpoint returned error code {e.response.status_code}"
         )
-    
+
     # Check uniqueness
     result = await db.execute(select(Agent).where(Agent.name == agent_in.name))
     if result.scalars().first():
         raise HTTPException(status_code=400, detail="Agent name already registered")
-        
+
     # Save agent
     new_agent = Agent(
         name=agent_in.name,
@@ -61,13 +61,26 @@ async def get_agent(agent_id: int, db: AsyncSession = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Agent not found")
     return agent
 
+from fastapi import Header
+from app.database import settings, get_db
+
 @router.delete("/{agent_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_agent(agent_id: int, db: AsyncSession = Depends(get_db)):
+async def delete_agent(
+    agent_id: int,
+    db: AsyncSession = Depends(get_db),
+    x_admin_api_key: str = Header(None)
+):
+    if x_admin_api_key != settings.ADMIN_API_KEY:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or missing Admin API Key"
+        )
+
     result = await db.execute(select(Agent).where(Agent.id == agent_id))
     agent = result.scalars().first()
     if not agent:
         raise HTTPException(status_code=404, detail="Agent not found")
-    
+
     await db.delete(agent)
     await db.commit()
     return None

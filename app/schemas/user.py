@@ -1,12 +1,22 @@
-from typing import Optional
-from fastapi_users import schemas
-from pydantic import ConfigDict
+from pydantic import BaseModel, EmailStr, ConfigDict
 
-class UserRead(schemas.BaseUser[int]):
+class UserBase(BaseModel):
+    email: EmailStr
+
+class UserCreate(UserBase):
+    password: str
+
+class UserRead(UserBase):
+    id: int
+    is_active: bool
+    is_superuser: bool
+    is_verified: bool
+
     model_config = ConfigDict(from_attributes=True)
 
-class UserCreate(schemas.BaseUserCreate):
-    pass
+class Token(BaseModel):
+    access_token: str
+    token_type: str
 
-class UserUpdate(schemas.BaseUserUpdate):
-    pass
+class TokenData(BaseModel):
+    email: str | None = None

@@ -30,7 +30,7 @@ Before auditing, discover project context:
 **Project skills:** Check `.agent/skills/` or `.agents/skills/` directory if either exists:
 1. List available skills (subdirectories)
 2. Read `SKILL.md` for each skill
-3. 
+3.
 </project_context>
 
 <upstream_input>

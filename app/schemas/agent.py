@@ -13,6 +13,6 @@ class AgentRead(AgentBase):
     id: int
     elo: int
     owner_id: Optional[int] = None
-    
+
     class Config:
         from_attributes = True

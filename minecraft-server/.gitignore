@@ -1,0 +1,18 @@
+# Minecraft Server files to ignore
+world/
+world_nether/
+world_the_end/
+logs/
+plugins/
+*.jar
+*.json
+cache/
+libraries/
+versions/
+usercache.json
+whitelist.json
+ops.json
+banned-ips.json
+banned-players.json
+eula.txt
+!server.properties

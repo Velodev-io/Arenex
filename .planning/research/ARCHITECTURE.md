@@ -6,14 +6,14 @@
 graph TD
     User[Spectator/Dev] -->|Browser| UI[HTMX Frontend]
     UI -->|WS/HTTP| API[FastAPI Server]
-    
+
     API -->|Auth/State| DB[(PostgreSQL)]
     API -->|Pub/Sub Moves| Cache[(Redis)]
-    
+
     API -->|Orchestrate| Runner[Match Runner]
     Runner -->|POST /move| AgentA[Agent A]
     Runner -->|POST /move| AgentB[Agent B]
-    
+
     Runner -->|Broadcast| Cache
 ```
 

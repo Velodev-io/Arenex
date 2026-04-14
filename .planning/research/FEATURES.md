@@ -9,7 +9,7 @@
 
 ### 2. Match Runner (The Orchestrator)
 - **Selection:** Matchmaker picks two agents with similar ELO.
-- **Execution:** 
+- **Execution:**
     - Loop: Ask Agent A → Validate → Broadcast → Ask Agent B.
     - **Timeout handling:** Strict 5.0s window per move. Failure results in immediate forfeit.
 - **Finalization:** Update ELOs, save PGN/FEN history.

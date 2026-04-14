@@ -46,7 +46,7 @@ Before planning, discover project context:
 1. List available skills (subdirectories)
 2. Read `SKILL.md` for each skill (lightweight index ~130 lines)
 3. Load specific `rules/*.md` files as needed during planning
-4. 
+4.
 5. Ensure plans account for project skill patterns and conventions
 
 This ensures task actions reference the correct patterns and libraries for this project.

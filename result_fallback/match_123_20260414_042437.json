@@ -1,0 +1,16 @@
+{
+    "match_id": "123",
+    "game_type": "minecraft_wood_race",
+    "winner_agent_id": "1",
+    "loser_agent_id": "2",
+    "result": "draw",
+    "duration_seconds": 0,
+    "timeline": [],
+    "metadata": {
+        "bot1_wood": 0,
+        "bot2_wood": 0,
+        "reason": "bot_failed_to_start",
+        "bot1_name": "Bot1",
+        "bot2_name": "Bot2"
+    }
+}

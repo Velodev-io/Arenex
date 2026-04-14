@@ -306,7 +306,7 @@
 
         async function onCellClick(r, c) {
             if (!gameActive || currentTurn !== playerMark || boardState[r][c] !== "") return;
-            
+
             // Player makes a move
             boardState[r][c] = playerMark;
             updateBoardUI();
@@ -325,7 +325,7 @@
             boardState = [["", "", ""], ["", "", ""], ["", "", ""]];
             gameId = "game_" + Math.floor(Math.random() * 1000000);
             updateBoardUI();
-            
+
             // Random assignment
             if (Math.random() < 0.5) {
                 playerMark = "X";
