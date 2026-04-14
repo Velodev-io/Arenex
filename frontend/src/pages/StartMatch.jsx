@@ -14,7 +14,7 @@ const StartMatch = () => {
   useEffect(() => {
     const fetchAgents = async () => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/agents/`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/agents`);
         const data = await response.json();
         setAgents(data);
       } catch (err) {
@@ -37,7 +37,7 @@ const StartMatch = () => {
     setError(null);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/matches/`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/matches`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
