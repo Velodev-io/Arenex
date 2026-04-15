@@ -56,7 +56,7 @@ const StartMatch = () => {
       }
 
       const match = await response.json();
-      navigate(`/match/${match.id}`);
+      navigate(`/match/${match.id}`, { state: { game_type: gameType } });
     } catch (err) {
       setError(err.message);
     } finally {

@@ -1,125 +1,38 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const SCALE = 4; // 1 minecraft unit = 4 canvas pixels
-const WIDTH = 600;
-const HEIGHT = 400;
-
-const MinecraftMap = ({ matchId, viewerUrl = null, bot1, bot2 }) => {
-  const canvasRef = useRef(null);
-  const requestRef = useRef();
+const MinecraftMap = ({ matchId, viewerUrl = null }) => {
   const [viewerReady, setViewerReady] = useState(false);
   const [viewerError, setViewerError] = useState(false);
   
-  // Interpolation state
-  const bot1Pos = useRef({ x: 0, z: 0 });
-  const bot2Pos = useRef({ x: 0, z: 0 });
-  const target1Pos = useRef({ x: 0, z: 0 });
-  const target2Pos = useRef({ x: 0, z: 0 });
-
-  // Update targets when props change
-  useEffect(() => {
-    if (bot1?.position) target1Pos.current = { x: bot1.position.x, z: bot1.position.z };
-    if (bot2?.position) target2Pos.current = { x: bot2.position.x, z: bot2.position.z };
-  }, [bot1, bot2]);
-
-  // Seeded Random for trees
-  const trees = React.useMemo(() => {
-    const seed = matchId.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    const treeList = [];
-    let s = seed;
-    for (let i = 0; i < 15; i++) {
-        s = (s * 9301 + 49297) % 233280;
-        const x = (s % WIDTH);
-        s = (s * 9301 + 49297) % 233280;
-        const z = (s % HEIGHT);
-        treeList.push({ x, z });
-    }
-    return treeList;
-  }, [matchId]);
-
-  const animate = (time) => {
-    if (!canvasRef.current) return;
-    const ctx = canvasRef.current.getContext('2d');
-    
-    // Interpolate
-    const lerp = (start, end) => start + (end - start) * 0.1;
-    bot1Pos.current.x = lerp(bot1Pos.current.x, target1Pos.current.x);
-    bot1Pos.current.z = lerp(bot1Pos.current.z, target1Pos.current.z);
-    bot2Pos.current.x = lerp(bot2Pos.current.x, target2Pos.current.x);
-    bot2Pos.current.z = lerp(bot2Pos.current.z, target2Pos.current.z);
-
-    // Render
-    ctx.clearRect(0, 0, WIDTH, HEIGHT);
-    
-    // Grass
-    ctx.fillStyle = '#1a472a';
-    ctx.fillRect(0, 0, WIDTH, HEIGHT);
-
-    // Grid
-    ctx.strokeStyle = 'rgba(255,255,255,0.05)';
-    ctx.beginPath();
-    for(let i=0; i<WIDTH; i+=20) { ctx.moveTo(i,0); ctx.lineTo(i,HEIGHT); }
-    for(let i=0; i<HEIGHT; i+=20) { ctx.moveTo(0,i); ctx.lineTo(WIDTH,i); }
-    ctx.stroke();
-
-    // Trees
-    ctx.fillStyle = '#0a2e18';
-    trees.forEach(t => {
-        ctx.beginPath();
-        ctx.arc(t.x, t.z, 8, 0, Math.PI * 2);
-        ctx.fill();
-    });
-
-    // Translate and center Minecraft (0,0) to center of canvas (approx)
-    const renderBot = (pos, color, label) => {
-        const rx = WIDTH/2 + pos.x * SCALE;
-        const rz = HEIGHT/2 + pos.z * SCALE;
-        
-        ctx.fillStyle = color;
-        ctx.beginPath();
-        ctx.arc(rx, rz, 10, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.strokeStyle = '#fff';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-
-        ctx.fillStyle = '#fff';
-        ctx.font = 'bold 12px Inter, sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(label, rx, rz - 15);
-    };
-
-    renderBot(bot1Pos.current, '#4a9eff', 'B1');
-    renderBot(bot2Pos.current, '#ff6b6b', 'B2');
-
-    requestRef.current = requestAnimationFrame(animate);
-  };
-
-  const shouldUseViewer = Boolean(viewerUrl) && !viewerError;
-  
-  useEffect(() => {
-    if (shouldUseViewer) return undefined;
-    requestRef.current = requestAnimationFrame(animate);
-    return () => {
-      if (requestRef.current) cancelAnimationFrame(requestRef.current);
-    };
-  }, [trees, shouldUseViewer]);
+  // Rewrite localhost to Mac Mini IP for the 3D Viewer since it's hosted there
+  const resolvedViewerUrl = viewerUrl ? viewerUrl.replace(/localhost|127\.0\.0\.1/, '192.168.1.25') : null;
 
   useEffect(() => {
     setViewerReady(false);
     setViewerError(false);
-  }, [viewerUrl]);
+  }, [resolvedViewerUrl]);
 
   return (
-    <div style={{ position: 'relative', width: WIDTH, height: HEIGHT, borderRadius: '12px', overflow: 'hidden', border: '2px solid var(--border)' }}>
-      {shouldUseViewer ? (
+    <div 
+      style={{ 
+        position: 'relative', 
+        width: '100%', 
+        aspectRatio: '16/9', 
+        minHeight: '400px',
+        borderRadius: '12px', 
+        overflow: 'hidden', 
+        border: '2px solid var(--border)',
+        backgroundColor: '#0a1015'
+      }}
+    >
+      {(resolvedViewerUrl && !viewerError) ? (
         <>
           <iframe
-            src={viewerUrl}
+            src={resolvedViewerUrl}
             title="Minecraft Live View"
             width="100%"
             height="100%"
-            style={{ border: 'none' }}
+            style={{ border: 'none', display: 'block' }}
             onLoad={() => setViewerReady(true)}
             onError={() => setViewerError(true)}
           />
@@ -131,17 +44,42 @@ const MinecraftMap = ({ matchId, viewerUrl = null, bot1, bot2 }) => {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                backgroundColor: 'rgba(10, 20, 10, 0.7)',
+                backgroundColor: 'rgba(10, 16, 21, 0.8)',
                 color: '#fff',
-                fontWeight: 'bold',
+                fontWeight: '500',
+                fontSize: '1.1rem'
               }}
             >
-              Loading Minecraft world...
+              Loading 3D World...
             </div>
           )}
         </>
       ) : (
-        <canvas ref={canvasRef} width={WIDTH} height={HEIGHT} />
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: 'var(--text-secondary)',
+            textAlign: 'center',
+            padding: '2rem'
+          }}
+        >
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: '1rem', opacity: 0.5 }}>
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+          <span style={{ fontSize: '1.2rem', fontWeight: 500, color: 'var(--text)' }}>
+             Waiting for Minecraft Server...
+          </span>
+          <span style={{ fontSize: '0.9rem', marginTop: '0.5rem', opacity: 0.7 }}>
+             The 3D stream will start automatically when the bots spawn in.
+          </span>
+        </div>
       )}
     </div>
   );
